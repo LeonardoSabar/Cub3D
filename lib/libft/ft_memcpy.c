@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/12 12:16:49 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/04 09:44:08 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include	"libft.h"
 
-int	main(int argc, char **argv)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	size_t	idx;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	idx = 0;
+	if (dest == NULL || src == NULL || (dest > src && dest < (src + n)))
+		return (ft_memmove(dest, src, n));
+	while (idx < n)
+	{
+		((unsigned char *)dest)[idx] = ((unsigned char *)src)[idx];
+		idx++;
+	}
+	return (dest);
 }

@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/09 16:19:27 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/06 07:58:22 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include	"libft.h"
 
-int	main(int argc, char **argv)
+int	ft_isalpha(int c)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
-
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	return (0);
 }

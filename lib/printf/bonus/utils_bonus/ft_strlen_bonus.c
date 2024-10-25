@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/10 09:33:53 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/12/02 16:12:55 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes_bonus/ft_printf_bonus.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlen(const char *s)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	t_unsgi	len;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }

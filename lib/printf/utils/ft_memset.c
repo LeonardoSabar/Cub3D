@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/11 09:54:03 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/12/07 15:11:51 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/ft_printf.h"
 
-int	main(int argc, char **argv)
+void	*ft_memset(void *s, int c, size_t n)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	size_t	idx;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	idx = 0;
+	while (idx < n)
+	{
+		((char *)s)[idx] = (char)c;
+		idx++;
+	}
+	return (s);
 }

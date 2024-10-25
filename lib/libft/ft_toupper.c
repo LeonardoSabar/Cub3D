@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/10 11:41:39 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/06 08:00:06 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include	"libft.h"
 
-int	main(int argc, char **argv)
+int	ft_toupper(int c)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
-
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
 }

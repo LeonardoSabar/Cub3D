@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_puthash.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/12/07 12:06:21 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/12/07 15:12:03 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/ft_printf.h"
 
-int	main(int argc, char **argv)
+int	ft_puthash(const char *format, long int idx, va_list ap)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	long long	value;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	value = (long long)va_arg(ap, unsigned int);
+	if (value == 0)
+		return (ft_putchar('0'));
+	if (format[idx] == 'x')
+		return (ft_putstr("0x") + ft_puthex(value, LOWER_HEX));
+	else if (format[idx] == 'X')
+		return (ft_putstr("0X") + ft_puthex(value, UPPER_HEX));
+	else
+		return (ft_putchar('0'));
 }

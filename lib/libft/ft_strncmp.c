@@ -1,27 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/16 12:40:54 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/07 18:32:41 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include	"libft.h"
 
-int	main(int argc, char **argv)
+int	ft_strncmp(const char *str1, const char *str2, size_t n)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
-
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	while (n > 0 && *str1 && (*str1 == *str2))
+	{
+		str1++;
+		str2++;
+		n--;
+	}
+	if (n == 0 || (*str1 == *str2))
+		return (0);
+	else
+		return ((unsigned char)*str1 - (unsigned char)*str2);
 }

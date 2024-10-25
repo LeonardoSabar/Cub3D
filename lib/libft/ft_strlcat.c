@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/13 18:59:27 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/07 18:32:16 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+size_t	ft_strlcat(char *dest, const char *src, size_t size)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	size_t	src_len;
+	size_t	dest_len;
+	size_t	idx;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	src_len = ft_strlen(src);
+	dest_len = ft_strlen(dest);
+	idx = 0;
+	while (src[idx] && dest_len + idx + 1 < size)
+	{
+		dest[dest_len + idx] = src[idx];
+		idx++;
+	}
+	dest[dest_len + idx] = '\0';
+	if (size < dest_len)
+		return (src_len + size);
+	else
+		return (src_len + dest_len);
 }

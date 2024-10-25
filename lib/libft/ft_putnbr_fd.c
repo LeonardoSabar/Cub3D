@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/24 08:29:12 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/11/06 16:59:01 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "libft.h"
 
-int	main(int argc, char **argv)
+void	ft_putnbr_fd(int n, int fd)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	long int	nb;
+	char		result;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	nb = n;
+	if (nb < 0)
+	{
+		write (fd, "-", 1);
+		nb = -nb;
+	}
+	if (nb < 10)
+	{
+		result = nb + '0';
+		write(fd, &result, 1);
+		return ;
+	}
+	else
+	{
+		ft_putnbr_fd(nb / 10, fd);
+	}
+	result = nb % 10 + '0';
+	write(fd, &result, 1);
 }

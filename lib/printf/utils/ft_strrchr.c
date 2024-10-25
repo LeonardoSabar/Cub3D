@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/09/28 10:33:27 by leobarbo         ###   ########.fr       */
+/*   Created: 2023/10/16 10:59:34 by leobarbo          #+#    #+#             */
+/*   Updated: 2023/12/07 15:12:40 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3d.h"
+#include "../includes/ft_printf.h"
 
-int	main(int argc, char **argv)
+char	*ft_strrchr(const char *str, int ch)
 {
-	cub3d_t	game;
-	if (argc != 2)
-		return (1); //Retornar mensagem de erro personalizada aqui.
+	const char	*last_ch;
 
-	game.mlx = mlx_init();
-	// parsing();
-	// init();
-	// render();
-	// game_loop();
-	// free();
+	ch = ch % 256;
+	last_ch = ((void *)0);
+	while (*str)
+	{
+		if (*str == ch)
+			last_ch = str;
+		str++;
+	}
+	if (ch == '\0')
+		return ((char *)str);
+	return ((char *)last_ch);
 }

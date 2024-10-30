@@ -6,13 +6,12 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2024/10/29 00:12:42 by leobarbo         ###   ########.fr        #
+#    Updated: 2024/10/29 23:30:28 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	:= cub3d
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
-LIBMLX	:= ./lib/MLX42/
 LIBFT	:= ./lib/libft
 PRINTF	:= ./lib/printf
 SRCS_PATH	:= ./src/
@@ -31,7 +30,7 @@ ifdef WITH_BONUS
 endif
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(PRINTF)/include
-LIBS	:= $(LIBMLX)/build/libmlx42.a ${LIBFT}/libft.a $(PRINTF)/libftprintf.a -ldl -lglfw -pthread -lm
+LIBS	:= ${LIBFT}/libft.a $(PRINTF)/libftprintf.a -ldl -lglfw -pthread -lm 
 SRCS	:= $(addprefix $(SRCS_PATH),\
 			main.c)
 
@@ -42,13 +41,10 @@ OBJS	:= ${SRCS:%.c=%.o}
 
 OBJS_BONUS	:= ${SRCS_BONUS:%.c=%.o}
 
-all: libmlx libft printf $(NAME)
+all: libft printf $(NAME)
 
 libft:
 	$(MAKE) -C ${LIBFT} all
-
-libmlx:
-	@cmake $(LIBMLX) -B $(LIBMLX)/build && make -C $(LIBMLX)/build -j4
 
 printf:
 	$(MAKE) -C ${PRINTF} all

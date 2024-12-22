@@ -11,10 +11,56 @@
 # include <memory.h>
 
 
-typedef struct s_cub3d
+WIN_WIDTH 800
+WIN_HEIGHT 600
+
+# ifndef O_DIRECTORY
+#  define O_DIRECTORY 00200000
+# endif
+
+
+typedef struct s_textures {
+    char *north;
+    char *south;
+    char *west;
+    char *east;
+}				t_textures;
+
+typedef struct s_player
+{   
+    char    direction;
+    double  pos_x;
+    double  pos_y;
+    double  dir_x;
+    double  dir_y;
+    double  plane_x;
+    double  plane_y;
+    float   move_x;
+    float   move_y;
+    float   angle;
+}				t_player;
+
+typedef struct s_mapinfo
 {
-	mlx_t		*mlx;
-	mlx_image_t	*image;
-}				cub3d_t;
+	int			fd;
+	int			line_count;
+	char		*path;
+	char		**file;
+	int			height;
+	int			width;
+	int			index_end_of_map;
+}	t_mapinfo;
+
+typedef struct s_game
+{
+    void        *mlx;
+    void        *windows;
+    int         width;
+    int         height;
+    t_mapinfo   mapinfo;
+    t_player    player;
+    char        **map;
+	t_textures	textures;
+}				game_t;
 
 #endif

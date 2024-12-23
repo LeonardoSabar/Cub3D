@@ -12,13 +12,14 @@
 
 #include "../../include/cub3d.h"
 
-void	parse_extention(char *file)
+static bool	parse_extention(char *file)
 {
-	if (ft_strncmp(file + ft_strlen(file) - 4, ".cub", 4))
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+    bool ret;
+
+    ret = false;
+	if (!ft_strncmp(file + ft_strlen(file) - 4, ".cub", 4))
+        ret = true;
+    return (ret);
 }
 
 static bool	is_dir(char *arg)

@@ -12,14 +12,13 @@
 
 #include "../include/cub3d.h"
 
-void	parsing(t_data *data, char **argv)
+static int	parsing(t_data *data, char **argv)
 {
     if (parse_file(argv[1]) == 1)
         clean_exit(data, 1); 
     parse_data(argv[1], data);
 	if (get_file_data(data, data->mapinfo.file) == 1)
 		return (free_data(data));
-	// parse_args();
 	// parse_textures();
 	// parse_sprites();
 	// parse_colors();
@@ -31,7 +30,8 @@ int	main(int argc, char **argv)
     if(argc != 2)
         return (err_msg("Invalid number of arguments", 1));
     init_data(&data);
-    parsing(&data, argv);
+    if (parsing(&data, argv) != 0)
+		return (1);
 
 
 	// init();

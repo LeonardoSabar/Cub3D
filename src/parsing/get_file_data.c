@@ -6,11 +6,13 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/21 22:52:25 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/23 16:17:41 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+/*
 
 static char	*get_texture_path(char *line, int j)
 {
@@ -40,7 +42,7 @@ static char	*get_texture_path(char *line, int j)
 	return (path);
 }
 
-static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
+static int	fill_direction_textures(t_textures *textures, char *line, int j)
 {
 	if (line[j + 2] && ft_isprint(line[j + 2]))
 		return (2);
@@ -57,7 +59,7 @@ static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 	return (0);
 }
 
-static int	ignore_whitespaces_get_info(t_data *data, char **map, int i, int j)
+static int	ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 {
 	while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
 		j++;
@@ -69,13 +71,13 @@ static int	ignore_whitespaces_get_info(t_data *data, char **map, int i, int j)
 			if (fill_direction_textures(&data->texinfo, map[i], j) == 2)
 				return (err_msg("Invalid texture(s)", 1));
 			return (3);
-		}	
+		}
 		else
 		{
 			if (fill_color_textures(data, &data->texinfo, map[i], j) == 2)
 				return (1);
 			return (3);
-		}	
+		}
 	}
 	else if (ft_isdigit(map[i][j]))
 	{
@@ -86,7 +88,7 @@ static int	ignore_whitespaces_get_info(t_data *data, char **map, int i, int j)
 	return (4);
 }
 
-int	get_file_data(t_data *data, char **map)
+int	get_file_data(t_game *data, char **map)
 {
 	int	i;
 	int	j;
@@ -111,3 +113,6 @@ int	get_file_data(t_data *data, char **map)
 	}
 	return (0);
 }
+
+
+*/

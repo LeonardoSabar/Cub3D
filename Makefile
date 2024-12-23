@@ -6,7 +6,7 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2024/10/29 23:30:28 by leobarbo         ###   ########.fr        #
+#    Updated: 2024/12/23 15:55:24 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,15 +30,14 @@ ifdef WITH_BONUS
 endif
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(PRINTF)/include
-LIBS	:= ${LIBFT}/libft.a $(PRINTF)/libftprintf.a -ldl -lglfw -pthread -lm 
-SRCS	:= $(addprefix $(SRCS_PATH),\
-			main.c)
+LIBS	:= ${LIBFT}/libft.a $(PRINTF)/libftprintf.a -ldl -lglfw -pthread -lm
 
-SRCS_BONUS	:= $(addprefix $(SRCS_PATH_BONUS),\
-			)
+# Use o comando find para buscar recursivamente os arquivos .c
+SRCS	:= $(shell find $(SRCS_PATH) -type f -name "*.c")
+SRCS_BONUS	:= $(shell find $(SRCS_PATH_BONUS) -type f -name "*.c")
 
+# Converte os arquivos .c para .o
 OBJS	:= ${SRCS:%.c=%.o}
-
 OBJS_BONUS	:= ${SRCS_BONUS:%.c=%.o}
 
 all: libft printf $(NAME)
@@ -55,7 +54,7 @@ printf:
 $(NAME): $(OBJS)
 	printf "$(YELLOW)Compiling...$(RESET)\n"
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
-	printf "$(GREEN)Done!\n $(RESET)"
+	printf "$(GREEN)Done!\n$(RESET)"
 
 clean:
 	rm -rf $(OBJS)

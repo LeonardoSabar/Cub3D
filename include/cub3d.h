@@ -4,6 +4,7 @@
 # include "../lib/MLX42/include/MLX42/MLX42.h"
 # include "../lib/libft/libft.h"
 # include "../lib/printf/includes/ft_printf.h"
+# include "colors.h"
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -13,13 +14,124 @@
 # include <math.h>
 
 
-WIN_WIDTH 800
-WIN_HEIGHT 600
+# define WIDTH 1920
+# define HEIGHT 1080
+# define FOV 66
+# define ROT_SPEED 0.040
+# define MAX_MAP_W 480
+# define MAX_MAP_H 270
+# define CYAN 0x00FFFF
 
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
 # endif
 
+
+//****************************************************************************//
+//                                  Structs                                   //
+//****************************************************************************//
+
+typedef struct	s_ray
+{
+ double	ray_ngl;
+ double	distance;
+ int	flag;
+}				t_ray;
+
+typedef struct s_tile
+{
+	int	base;
+	int	width;
+	int	height;
+}	t_tile;
+
+typedef struct s_image
+{
+	mlx_texture_t	*texture;
+	mlx_image_t		*img;
+}	t_img;
+
+typedef struct s_render_img
+{
+	int	x;
+	int	y;
+	int	z;
+}	t_r_img;
+
+typedef struct s_object
+{
+	int		onoff;
+	t_img	img;
+	t_r_img	sizes;
+}	t_obj;
+
+typedef struct s_map
+{
+	int				line;
+	int				column;
+	char			content;
+	struct s_map	*nxt;
+	struct s_map	*prv;
+}	t_map;
+
+typedef struct s_cam
+{
+	int		plr_x;
+	int		plr_y;
+	int		rotation;
+	int		l_r;
+	double	angle;
+	float	fov_plr;
+}	t_cam;
+
+typedef struct s_mapinfo
+{
+	int			fd;
+	int			line_count;
+	char		*path;
+	char		**file;
+	int			height;
+	int			width;
+	int			index_end_of_map;
+}	t_mapinfo;
+
+typedef struct s_game
+{
+    t_mapinfo	mapinfo;
+	int			is_horizon;
+	mlx_image_t	*img;
+	mlx_image_t	*game;
+	mlx_image_t	*p_img;
+	mlx_image_t	*bg_img;
+	t_tile		tile;
+	mlx_t		*mlx_on;
+	t_map		*map;
+	t_cam		*cam;
+	t_ray		ray;
+}	t_game;
+
+
+//****************************************************************************//
+//                                 Functions                                  //
+//****************************************************************************//
+
+void    clean_exit(t_game *data, int code);
+void    free_tab(void **tab);
+void    init_data(t_game *data);
+int     fill_color_textures(t_game *data, t_mapinfo *textures, char *line, int j);
+int     create_map(t_game *data, char **file, int i);
+int     get_file_data(t_game *data, char **map);
+int     parse_file(char *file);
+int     parse_data(char *path, t_game *data);
+size_t  find_biggest_len(t_mapinfo *map, int i);
+int     is_a_white_space(char c);
+int     get_map_info(t_game *data, char **file, int i);
+int     err_msg(char *message, int code);
+
+#endif
+
+
+/*
 
 typedef struct s_textures {
     char *north;
@@ -29,7 +141,7 @@ typedef struct s_textures {
 }				t_textures;
 
 typedef struct s_player
-{   
+{
     char    direction;
     double  pos_x;
     double  pos_y;
@@ -63,6 +175,7 @@ typedef struct s_game
     t_player    player;
     char        **map;
 	t_textures	textures;
-}				game_t;
+}				t_game;
 
-#endif
+
+*/

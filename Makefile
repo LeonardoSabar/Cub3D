@@ -6,7 +6,7 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2024/12/27 01:17:30 by leobarbo         ###   ########.fr        #
+#    Updated: 2024/12/27 14:11:03 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,6 @@ NAME	:= cub3d
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 LIBFT	:= ./lib/libft
 PRINTF	:= ./lib/printf
-GNL		:= ./lib/gnl
 LIBMLX	:= ./lib/MLX42/MLX42/MLX42/build
 SRCS_PATH	:= ./src/
 .SILENT:
@@ -25,7 +24,7 @@ RESET = \033[0m
 
 
 HEADERS	:= -I ./include -I $(LIBMLX)/include -I $(LIBFT)/include -I $(PRINTF)/include
-LIBS	:= ${LIBFT}/libft.a $(PRINTF)/libftprintf.a $(GNL)/gnl.a $(LIBMLX)/libmlx42.a -lXext -lX11 -lm
+LIBS	:= ${LIBFT}/libft.a $(PRINTF)/libftprintf.a $(LIBMLX)/libmlx42.a -lXext -lX11 -lm
 
 SRCS	:= $(shell find $(SRCS_PATH) -type f -name "*.c")
 
@@ -36,9 +35,6 @@ all: libft printf $(NAME)
 
 libmlx:
 	$(MAKE) -C ${LIBMLX} all
-
-gnl:
-	$(MAKE) -C ${GNL} all
 
 libft:
 	$(MAKE) -C ${LIBFT} all

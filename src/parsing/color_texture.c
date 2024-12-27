@@ -6,14 +6,12 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/23 16:17:09 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:25:47 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-
-/*
 
 static bool	no_digit(char *str)
 {
@@ -77,7 +75,7 @@ static int	*set_rgb_colors(char *line)
 }
 
 
-int	fill_color_textures(t_game *data, t_mapinfo *textures, char *line, int j)
+int	fill_color_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 1] && ft_isprint(line[j + 1]))
 		return (err_msg("Invalid floor/ceiling RGB color(s)", 2));
@@ -98,4 +96,3 @@ int	fill_color_textures(t_game *data, t_mapinfo *textures, char *line, int j)
 	return (0);
 }
 
-*/

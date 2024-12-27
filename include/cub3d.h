@@ -87,6 +87,24 @@ typedef struct s_cam
 	float	fov_plr;
 }	t_cam;
 
+typedef struct s_texinfo
+{
+	char			*north;
+	char			*south;
+	char			*west;
+	char			*east;
+	int				*floor;
+	int				*ceiling;
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
+	int				size;
+	int				index;
+	double			step;
+	double			pos;
+	int				x;
+	int				y;
+}	t_texinfo;
+
 typedef struct s_mapinfo
 {
 	int			fd;
@@ -100,6 +118,7 @@ typedef struct s_mapinfo
 
 typedef struct s_game
 {
+	t_texinfo	texinfo;
     t_mapinfo	mapinfo;
 	int			is_horizon;
 	char		**parse_map;
@@ -122,7 +141,7 @@ typedef struct s_game
 void    clean_exit(t_game *data, int code);
 void    free_tab(void **tab);
 void    init_data(t_game *data);
-int     fill_color_textures(t_game *data, t_mapinfo *textures, char *line, int j);
+int     fill_color_textures(t_texinfo *textures, char *line, int j);
 int     create_map(t_game *data, char **file, int i);
 int     parse_file(char *file);
 void     parse_data(char *path, t_game *data);
@@ -131,6 +150,8 @@ int     is_a_white_space(char c);
 int     err_msg(char *message, int code);
 int     is_blank_line(const char *line);
 int     get_file_data(t_game *data, char **file);
+
+char   *get_next_line(int fd);
 
 #endif
 

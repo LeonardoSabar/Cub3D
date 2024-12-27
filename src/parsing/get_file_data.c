@@ -6,13 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/23 16:17:41 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 14:19:50 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-/*
 
 static char	*get_texture_path(char *line, int j)
 {
@@ -42,7 +40,7 @@ static char	*get_texture_path(char *line, int j)
 	return (path);
 }
 
-static int	fill_direction_textures(t_textures *textures, char *line, int j)
+static int	fill_direction_textures(t_texinfo *textures, char *line, int j)
 {
 	if (line[j + 2] && ft_isprint(line[j + 2]))
 		return (2);
@@ -114,5 +112,3 @@ int	get_file_data(t_game *data, char **map)
 	return (0);
 }
 
-
-*/

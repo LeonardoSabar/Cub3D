@@ -1,7 +1,4 @@
-#include "gnl.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+#include "../include/cub3d.h"
 
 #define BUFFER_SIZE 42 // Defina o tamanho do buffer conforme necessário
 

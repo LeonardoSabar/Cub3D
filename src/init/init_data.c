@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 17:34:12 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 17:35:50 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ static void init_texinfo(t_texinfo *texinfo)
 
 void init_data(t_game *data)
 {
-    // Aloca memória para cada estrutura necessária
     data->cam = malloc(sizeof(t_cam));
     if (!data->cam)
     {
@@ -99,11 +98,11 @@ void init_data(t_game *data)
     if (!data->map)
     {
         err_msg("Failed to allocate memory for map.", 1);
-        free(data->cam); // Liberar memória já alocada
+        free(data->cam);
         exit(EXIT_FAILURE);
     }
 
-    data->texinfo.floor = malloc(sizeof(int) * 3); // Exemplo: alocar espaço para as cores RGB
+    data->texinfo.floor = malloc(sizeof(int) * 3); 
     if (!data->texinfo.floor)
     {
         err_msg("Failed to allocate memory for floor color.", 1);
@@ -112,7 +111,6 @@ void init_data(t_game *data)
         exit(EXIT_FAILURE);
     }
 
-    // Inicializa outros membros da estrutura
     data->is_horizon = 0;
     data->parse_map = NULL;
     data->img = NULL;
@@ -121,10 +119,10 @@ void init_data(t_game *data)
     data->bg_img = NULL;
     data->mlx_on = NULL;
 
-    // Inicializando as outras estruturas
+
     init_ray(&data->ray);
     init_tile(&data->tile);
-    init_map(data->map); // Passar o ponteiro para o map
+    init_map(data->map);
     init_mapinfo(&data->mapinfo);
     init_texinfo(&data->texinfo);
     init_object(&data->obj);

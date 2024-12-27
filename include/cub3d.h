@@ -17,6 +17,9 @@
 # include "../lib/gnl/gnl.h" // Mudar para GNL do Thiago
 
 
+# define SUCCESS 0
+# define ERROR 1
+
 # define WIDTH 1920
 # define HEIGHT 1080
 # define FOV 66
@@ -131,6 +134,7 @@ typedef struct s_game
 	t_map		*map;
 	t_cam		*cam;
 	t_ray		ray;
+	t_obj		obj;
 }	t_game;
 
 
@@ -144,7 +148,7 @@ void    init_data(t_game *data);
 int     fill_color_textures(t_texinfo *textures, char *line, int j);
 int     create_map(t_game *data, char **file, int i);
 int     parse_file(char *file);
-void     parse_data(char *path, t_game *data);
+int     parse_data(char *path, t_game *data);
 size_t  find_biggest_len(t_mapinfo *map, int i);
 int     is_a_white_space(char c);
 int     err_msg(char *message, int code);

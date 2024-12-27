@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 14:19:50 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:51:54 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*get_texture_path(char *line, int j)
 	if (line[j] && line[j] != '\n')
 	{
 		free(path);
-		path = NULL;
+		return (NULL);
 	}
 	return (path);
 }
@@ -72,7 +72,7 @@ static int	ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 		}
 		else
 		{
-			if (fill_color_textures(data, &data->texinfo, map[i], j) == 2)
+			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
 				return (1);
 			return (3);
 		}

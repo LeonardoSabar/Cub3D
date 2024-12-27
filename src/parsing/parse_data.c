@@ -6,37 +6,33 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 20:06:03 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 00:57:35 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:47:23 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	get_number_of_lines(char *path)
+static int get_number_of_lines(char *path)
 {
-	int		fd;
-	char	*line;
-	int		line_count;
+    int fd;
+    char *line;
+    int line_count = 0;
 
-	line_count = 0;
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		err_msg(strerror(errno), errno);
-	else
-	{
-		line = get_next_line(fd);
-		while (line != NULL)
-		{
-			line_count++;
-			free(line);
-			line = get_next_line(fd);
-		}
-		close(fd);
-	}
-	return (line_count);
+    fd = open(path, O_RDONLY);
+    if (fd < 0) {
+        err_msg(strerror(errno), errno);
+        return (ERROR);
+    }
+
+    while ((line = get_next_line(fd)) != NULL) {
+        line_count++;
+        free(line);
+    }
+    close(fd);
+    return line_count;
 }
 
-static void	fill_tab(int row, int column, int i, t_game *data)
+static int	fill_tab(int row, int column, int i, t_game *data)
 {
 	char	*line;
 
@@ -47,7 +43,8 @@ static void	fill_tab(int row, int column, int i, t_game *data)
 		if (!data->mapinfo.file[row])
 		{
 			err_msg("Could not allocate memory", 0);
-			return (free_tab((void **)data->mapinfo.file));
+			free_tab((void **)data->mapinfo.file);
+			return (ERROR);
 		}
 		while (line[i] != '\0')
 			data->mapinfo.file[row][column++] = line[i++];
@@ -58,9 +55,10 @@ static void	fill_tab(int row, int column, int i, t_game *data)
 		line = get_next_line(data->mapinfo.fd);
 	}
 	data->mapinfo.file[row] = NULL;
+	return (SUCCESS);
 }
 
-void	parse_data(char *path, t_game *data)
+int	parse_data(char *path, t_game *data)
 {
 	int		row;
 	int		i;
@@ -70,22 +68,28 @@ void	parse_data(char *path, t_game *data)
 	row = 0;
 	column = 0;
 	data->mapinfo.line_count = get_number_of_lines(path);
+	if (data->mapinfo.line_count == -1)
+		return (ERROR);
 	data->mapinfo.path = path;
 	data->mapinfo.file = ft_calloc(data->mapinfo.line_count \
 			+ 1, sizeof(char *));
 	if (!(data->mapinfo.file))
 	{
 		err_msg("Could not allocate memory", 0);
-		return ;
+		return (ERROR);
 	}
 	data->mapinfo.fd = open(path, O_RDONLY);
 	if (data->mapinfo.fd < 0)
+	{
 		err_msg(strerror(errno), 1);
+		return (ERROR);
+	}
 	else
 	{
 		fill_tab(row, column, i, data);
 		close(data->mapinfo.fd);
 	}
+	return (SUCCESS);
 }
 
 

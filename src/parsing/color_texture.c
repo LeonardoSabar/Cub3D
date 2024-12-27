@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 14:25:47 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 16:59:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,23 @@ static bool	no_digit(char *str)
 	return (found_no_digit);
 }
 
-static int	*copy_into_rgb_array(char **rgb_to_convert, int *rgb)
+static int *copy_into_rgb_array(char **rgb_to_convert, int *rgb)
 {
-	int		i;
+    int i = 0;
 
-	i = -1;
-	while (rgb_to_convert[++i])
-	{
-		rgb[i] = ft_atoi(rgb_to_convert[i]);
-		if (rgb[i] == -1 || no_digit(rgb_to_convert[i]) == true)
-		{
-			free_tab((void **)rgb_to_convert);
-			free(rgb);
-			return (0);
-		}
-	}
-	free_tab((void **)rgb_to_convert);
-	return (rgb);
+    while (rgb_to_convert[i])
+    {
+        rgb[i] = ft_atoi(rgb_to_convert[i]);
+        if (rgb[i] < 0 || rgb[i] > 255 || no_digit(rgb_to_convert[i]))
+        {
+            free_tab((void **)rgb_to_convert);
+            free(rgb);
+            return NULL;
+        }
+        i++;
+    }
+    free_tab((void **)rgb_to_convert);
+    return rgb;
 }
 
 
@@ -75,24 +75,28 @@ static int	*set_rgb_colors(char *line)
 }
 
 
-int	fill_color_textures(t_texinfo *textures, char *line, int j)
+int fill_color_textures(t_texinfo *textures, char *line, int j)
 {
-	if (line[j + 1] && ft_isprint(line[j + 1]))
-		return (err_msg("Invalid floor/ceiling RGB color(s)", 2));
-	if (!textures->ceiling && line[j] == 'C')
-	{
-		textures->ceiling = set_rgb_colors(line + j + 1);
-		if (textures->ceiling == 0)
-			return (err_msg("Invalid ceiling RGB color", 2));
-	}
-	else if (!textures->floor && line[j] == 'F')
-	{
-		textures->floor = set_rgb_colors(line + j + 1);
-		if (textures->floor == 0)
-			return (err_msg("Invalid floor RGB color", 2));
-	}
-	else
-		return (err_msg("Invalid floor/ceiling RGB color(s)", 2));
-	return (0);
+    if (line[j] == 'C' && line[j + 1] && ft_isprint(line[j + 1]))
+    {
+        if (!textures->ceiling)
+        {
+            textures->ceiling = set_rgb_colors(line + j + 1);
+            if (textures->ceiling == NULL)
+                return (err_msg("Invalid ceiling RGB color", 2));
+        }
+    }
+    else if (line[j] == 'F' && line[j + 1] && ft_isprint(line[j + 1]))
+    {
+        if (!textures->floor)
+        {
+            textures->floor = set_rgb_colors(line + j + 1);
+            if (textures->floor == NULL)
+                return (err_msg("Invalid floor RGB color", 2));
+        }
+    }
+    else
+        return (err_msg("Invalid floor/ceiling RGB color(s)", 2));
+    return (0);
 }
 

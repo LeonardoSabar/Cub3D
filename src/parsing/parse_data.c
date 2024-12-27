@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 20:06:03 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/21 20:06:03 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 00:57:35 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	get_number_of_lines(char *path)
 	line_count = 0;
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		err_msg(path, strerror(errno), errno);
+		err_msg(strerror(errno), errno);
 	else
 	{
 		line = get_next_line(fd);

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/21 19:30:05 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 00:56:49 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	parse_file(char *arg)
 	if (fd == -1)
 		return (err_msg(strerror(errno), 1));
 	close(fd);
-	if (!parse_extension(arg))
+	if (!parse_extention(arg))
 		return (err_msg("Not a .cub file", 1));
 	return (0);
 }

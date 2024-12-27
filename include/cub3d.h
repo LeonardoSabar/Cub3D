@@ -12,6 +12,9 @@
 # include <memory.h>
 # include <string.h>
 # include <math.h>
+# include <errno.h>
+
+# include "../lib/gnl/gnl.h" // Mudar para GNL do Thiago
 
 
 # define WIDTH 1920
@@ -99,6 +102,7 @@ typedef struct s_game
 {
     t_mapinfo	mapinfo;
 	int			is_horizon;
+	char		**parse_map;
 	mlx_image_t	*img;
 	mlx_image_t	*game;
 	mlx_image_t	*p_img;
@@ -120,13 +124,13 @@ void    free_tab(void **tab);
 void    init_data(t_game *data);
 int     fill_color_textures(t_game *data, t_mapinfo *textures, char *line, int j);
 int     create_map(t_game *data, char **file, int i);
-int     get_file_data(t_game *data, char **map);
 int     parse_file(char *file);
-int     parse_data(char *path, t_game *data);
+void     parse_data(char *path, t_game *data);
 size_t  find_biggest_len(t_mapinfo *map, int i);
 int     is_a_white_space(char c);
-int     get_map_info(t_game *data, char **file, int i);
 int     err_msg(char *message, int code);
+int     is_blank_line(const char *line);
+int     get_file_data(t_game *data, char **file);
 
 #endif
 

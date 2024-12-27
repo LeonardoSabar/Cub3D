@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 17:05:24 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 17:34:12 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,6 @@ static void init_tile(t_tile *tile)
 	tile->base = 0;
 	tile->width = 0;
 	tile->height = 0;
-}
-
-static void init_cam(t_cam *cam)
-{
-	cam->plr_x = 0;
-	cam->plr_y = 0;
-	cam->rotation = 0;
-	cam->l_r = 0;
-	cam->angle = 0;
-	cam->fov_plr = 0;
 }
 
 static void init_map(t_map *map)
@@ -92,8 +82,37 @@ static void init_texinfo(t_texinfo *texinfo)
     texinfo->y = 0;
 }
 
+#include <stdlib.h>
+#include "cub3d.h"
+
 void init_data(t_game *data)
 {
+    // Aloca memória para cada estrutura necessária
+    data->cam = malloc(sizeof(t_cam));
+    if (!data->cam)
+    {
+        err_msg("Failed to allocate memory for camera.", 1);
+        exit(EXIT_FAILURE);
+    }
+
+    data->map = malloc(sizeof(t_map));
+    if (!data->map)
+    {
+        err_msg("Failed to allocate memory for map.", 1);
+        free(data->cam); // Liberar memória já alocada
+        exit(EXIT_FAILURE);
+    }
+
+    data->texinfo.floor = malloc(sizeof(int) * 3); // Exemplo: alocar espaço para as cores RGB
+    if (!data->texinfo.floor)
+    {
+        err_msg("Failed to allocate memory for floor color.", 1);
+        free(data->cam);
+        free(data->map);
+        exit(EXIT_FAILURE);
+    }
+
+    // Inicializa outros membros da estrutura
     data->is_horizon = 0;
     data->parse_map = NULL;
     data->img = NULL;
@@ -101,10 +120,11 @@ void init_data(t_game *data)
     data->p_img = NULL;
     data->bg_img = NULL;
     data->mlx_on = NULL;
+
+    // Inicializando as outras estruturas
     init_ray(&data->ray);
     init_tile(&data->tile);
-    init_cam(data->cam);
-    init_map(data->map);
+    init_map(data->map); // Passar o ponteiro para o map
     init_mapinfo(&data->mapinfo);
     init_texinfo(&data->texinfo);
     init_object(&data->obj);

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 17:35:50 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/30 16:50:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ static void init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->path = NULL;
 	mapinfo->file = NULL;
 	mapinfo->height = 0;
+    mapinfo->width = 0;
 }
 
 static void init_img(t_img *img)

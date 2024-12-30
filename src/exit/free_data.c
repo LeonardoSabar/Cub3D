@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:51:54 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/21 19:51:54 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/30 17:30:24 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,28 @@ void	free_tab(void **tab)
 		free(tab);
 		tab = NULL;
 	}
+}
+
+void free_resources(t_game *data)
+{
+    t_map *current;
+    t_map *tmp;
+
+    if (data->cam)
+        free(data->cam);
+    current = data->map;
+    while (current)
+    {
+        tmp = current->nxt;
+        free(current);
+        current = tmp;
+    }
+    if (data->parse_map)
+        free_tab((void **)data->parse_map);
+    if (data->texinfo.floor)
+        free(data->texinfo.floor);
+    if (data->texinfo.ceiling)
+        free(data->texinfo.ceiling);
+    if (data->mapinfo.file)
+        free_tab((void **)data->mapinfo.file);
 }

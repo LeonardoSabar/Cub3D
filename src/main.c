@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 17:26:25 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/30 18:32:36 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 static int	parsing(t_game *data, char **argv)
 {
-    if (parse_file(argv[1]) == 1)
+    if (parse_file(argv[1]) != 0)
 		return (ERROR);
-        // clean_exit(data, 1); Fix clean_exit
-	if (parse_data(argv[1], data) == 1)
+	printf(RED "File parsed\n" RST); // Retirar
+	if (parse_data(argv[1], data) != 0)
 		return (ERROR);
+	printf(RED "Data parsed\n" RST); // Retirar
 	if (get_file_data(data, data->mapinfo.file) == 1)
 		return (ERROR);
-		//return (free_data(data));
 	// parse_textures();
 	// parse_sprites();
 	// parse_colors();
@@ -36,7 +36,8 @@ int	main(int argc, char **argv)
         return (err_msg("Invalid number of arguments!", 1));
     init_data(&data);
     if (parsing(&data, argv) != 0)
-		return (1);
+		clean_exit(&data, 1);
+
 
 
 	// init();

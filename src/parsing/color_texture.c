@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 17:37:28 by leobarbo         ###   ########.fr       */
+/*   Updated: 2024/12/27 18:05:40 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ static int *copy_into_rgb_array(char **rgb_to_convert, int *rgb)
     free_tab((void **)rgb_to_convert);
     return (rgb);
 }
-
 
 
 static int	*set_rgb_colors(char *line)

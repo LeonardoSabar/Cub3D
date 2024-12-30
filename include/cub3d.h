@@ -154,6 +154,7 @@ int     is_a_white_space(char c);
 int     err_msg(char *message, int code);
 int     is_blank_line(const char *line);
 int     get_file_data(t_game *data, char **file);
+void	free_resources(t_game *data);
 
 char   *get_next_line(int fd);
 

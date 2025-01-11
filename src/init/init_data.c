@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/30 16:50:33 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/11 16:35:43 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,89 +42,87 @@ static void init_mapinfo(t_mapinfo *mapinfo)
 	mapinfo->path = NULL;
 	mapinfo->file = NULL;
 	mapinfo->height = 0;
-    mapinfo->width = 0;
+	mapinfo->width = 0;
 }
 
 static void init_img(t_img *img)
 {
-    img->texture = NULL;
-    img->img = NULL;
+	img->texture = NULL;
+	img->img = NULL;
 }
 
 static void init_render_img(t_r_img *render_img)
 {
-    render_img->x = 0;
-    render_img->y = 0;
-    render_img->z = 0;
+	render_img->x = 0;
+	render_img->y = 0;
+	render_img->z = 0;
 }
 
 static void init_object(t_obj *obj)
 {
-    obj->onoff = 0;
-    init_img(&obj->img);
-    init_render_img(&obj->sizes);
+	obj->onoff = 0;
+	init_img(&obj->img);
+	init_render_img(&obj->sizes);
 }
 
 static void init_texinfo(t_texinfo *texinfo)
 {
-    texinfo->north = NULL; 
-    texinfo->south = NULL;
-    texinfo->west = NULL;
-    texinfo->east = NULL;
-    texinfo->floor = NULL;
-    texinfo->ceiling = NULL;
-    texinfo->hex_floor = 0;
-    texinfo->hex_ceiling = 0;
-    texinfo->size = 0;
-    texinfo->index = 0;
-    texinfo->step = 0.0;
-    texinfo->pos = 0.0;
-    texinfo->x = 0;
-    texinfo->y = 0;
+	texinfo->north = NULL;
+	texinfo->south = NULL;
+	texinfo->west = NULL;
+	texinfo->east = NULL;
+	texinfo->floor = NULL;
+	texinfo->ceiling = NULL;
+	texinfo->hex_floor = 0;
+	texinfo->hex_ceiling = 0;
+	texinfo->size = 0;
+	texinfo->index = 0;
+	texinfo->step = 0.0;
+	texinfo->pos = 0.0;
+	texinfo->x = 0;
+	texinfo->y = 0;
 }
-
-#include <stdlib.h>
-#include "cub3d.h"
+// Confirmar se é necessário malloc na inicialização 
 
 void init_data(t_game *data)
 {
-    data->cam = malloc(sizeof(t_cam));
-    if (!data->cam)
-    {
-        err_msg("Failed to allocate memory for camera.", 1);
-        exit(EXIT_FAILURE);
-    }
+	data->cam = malloc(sizeof(t_cam));
+	if (!data->cam)
+	{
+		err_msg("Failed to allocate memory for camera.", 1);
+		exit(EXIT_FAILURE);
+	}
 
-    data->map = malloc(sizeof(t_map));
-    if (!data->map)
-    {
-        err_msg("Failed to allocate memory for map.", 1);
-        free(data->cam);
-        exit(EXIT_FAILURE);
-    }
+	data->map = malloc(sizeof(t_map));
+	if (!data->map)
+	{
+		err_msg("Failed to allocate memory for map.", 1);
+		free(data->cam);
+		exit(EXIT_FAILURE);
+	}
 
-    data->texinfo.floor = malloc(sizeof(int) * 3); 
-    if (!data->texinfo.floor)
-    {
-        err_msg("Failed to allocate memory for floor color.", 1);
-        free(data->cam);
-        free(data->map);
-        exit(EXIT_FAILURE);
-    }
+	data->texinfo.floor = malloc(sizeof(int) * 3);
+	if (!data->texinfo.floor)
+	{
+		err_msg("Failed to allocate memory for floor color.", 1);
+		free(data->cam);
+		free(data->map);
+		exit(EXIT_FAILURE);
+	}
 
-    data->is_horizon = 0;
-    data->parse_map = NULL;
-    data->img = NULL;
-    data->game = NULL;
-    data->p_img = NULL;
-    data->bg_img = NULL;
-    data->mlx_on = NULL;
+	data->is_horizon = 0;
+	data->parse_map = NULL;
+	data->img = NULL;
+	data->game = NULL;
+	data->p_img = NULL;
+	data->bg_img = NULL;
+	data->mlx_on = NULL;
 
 
-    init_ray(&data->ray);
-    init_tile(&data->tile);
-    init_map(data->map);
-    init_mapinfo(&data->mapinfo);
-    init_texinfo(&data->texinfo);
-    init_object(&data->obj);
+	init_ray(&data->ray);
+	init_tile(&data->tile);
+	init_map(data->map);
+	init_mapinfo(&data->mapinfo);
+	init_texinfo(&data->texinfo);
+	init_object(&data->obj);
 }

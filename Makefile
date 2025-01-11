@@ -6,7 +6,7 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2024/12/30 17:37:20 by leobarbo         ###   ########.fr        #
+#    Updated: 2025/01/11 15:21:19 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME	:= cub3d
 CFLAGS	:= -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3
 LIBFT	:= ./lib/libft
 PRINTF	:= ./lib/printf
-LIBMLX42_PATH := ./lib/MLX42/MLX42
+LIBMLX42_PATH := ./lib/MLX42
 SRCS_PATH	:= ./src/
 .SILENT:
 

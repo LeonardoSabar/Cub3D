@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:30:08 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 00:55:47 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:57:40 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static int	fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 
 	mapinfo->width = find_biggest_len(mapinfo, index);
 	i = 0;
+
 	while (i < mapinfo->height)
 	{
 		j = 0;
@@ -66,7 +67,10 @@ static int	get_map_info(t_game *data, char **file, int i)
 	if (!data->map)
 		return (err_msg("Could not allocate memory", 1));
 	if (fill_map_tab(&data->mapinfo, data->parse_map, i) == 1)
+	{
+		free_tab((void **)data->parse_map);
 		return (1);
+	}
 	return (0);
 }
 

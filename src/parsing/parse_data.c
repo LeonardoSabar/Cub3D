@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 20:06:03 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/11 16:53:44 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/12 22:37:12 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,6 @@ static int get_number_of_lines(char *path)
 
 	if (fd < 0)
 		return (err_msg("Error opening file to count lines", 1));
-
-	// GNL dando erro, Trazer ouutra GNL para o projeto
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		line_count++;
@@ -142,7 +140,6 @@ static int fill_tab(t_game *data)
 		if (read_line_to_tab(row, line, data) == ERROR)
 		{
 			free(line);
-			data->mapinfo.file[row] = NULL;
 			return (ERROR);
 		}
 		free(line);

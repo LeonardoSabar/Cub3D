@@ -6,12 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/27 18:05:40 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/12 23:45:11 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
 
 static bool	no_digit(char *str)
 {
@@ -73,11 +72,18 @@ static int	*set_rgb_colors(char *line)
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
+int print_floor_ceiling(t_texinfo *textures)
+{
+    printf("Floor: %d, %d, %d\n", textures->floor[0], textures->floor[1], textures->floor[2]);
+    printf("Ceiling: %d, %d, %d\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2]);
+    return (0);
+}
 
 int fill_color_textures(t_texinfo *textures, char *line, int j)
 {
     if (line[j] == 'C' && line[j + 1] && ft_isprint(line[j + 1]))
     {
+        print_floor_ceiling(textures); // retirar
         if (!textures->ceiling)
         {
             textures->ceiling = set_rgb_colors(line + j + 1);

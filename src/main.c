@@ -6,11 +6,30 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/28 10:07:02 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/30 18:32:36 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/12 17:57:46 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
+
+static int print_map(t_game *data)
+{
+    // Verificar se mapinfo e file estão definidos
+	if (data == NULL || data->mapinfo.file == NULL)
+    {
+        return -1; // Falha ao imprimir, estrutura inválida
+    }
+
+	for (int i = 0; i < data->mapinfo.line_count; i++) // itera o número de linhas
+    {
+		if (data->mapinfo.file[i] != NULL) // Verifica se a linha não é NULL
+        {
+			printf("%s\n", data->mapinfo.file[i]); // Imprime a linha do conteúdo do mapa
+		  }
+    }
+    return 0;
+}
+  
 
 static int	parsing(t_game *data, char **argv)
 {
@@ -20,6 +39,7 @@ static int	parsing(t_game *data, char **argv)
 	if (parse_data(argv[1], data) != 0)
 		return (ERROR);
 	printf(RED "Data parsed\n" RST); // Retirar
+	print_map(data); // retirar
 	if (get_file_data(data, data->mapinfo.file) == 1)
 		return (ERROR);
 	// parse_textures();

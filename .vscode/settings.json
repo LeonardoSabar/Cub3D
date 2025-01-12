@@ -2,6 +2,7 @@
 	"cmake.sourceDirectory": "/nfs/homes/leobarbo/Cub3D/lib/MLX42",
 	"files.associations": {
 		"cub3d.h": "c",
-		"gnl.h": "c"
+		"gnl.h": "c",
+		"libft.h": "c"
 	}
 }

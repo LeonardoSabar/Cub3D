@@ -2,8 +2,7 @@
 # define CUB3D_H
 
 # include "../lib/MLX42/include/MLX42/MLX42.h"
-# include "../lib/libft/libft.h"
-# include "../lib/printf/includes/ft_printf.h"
+# include "../lib/libft/include/libft.h"
 # include "colors.h"
 # include <stdlib.h>
 # include <stdio.h>
@@ -13,9 +12,6 @@
 # include <string.h>
 # include <math.h>
 # include <errno.h>
-
-# include "../lib/gnl/gnl.h" // Mudar para GNL do Thiago
-
 
 # define SUCCESS 0
 # define ERROR 1

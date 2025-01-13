@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/13 01:48:39 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 23:09:59 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ static int print_texture(t_texinfo *textures)
 static int print_floor_ceiling(t_texinfo *textures)
 {
 	if (textures->ceiling)
-		printf("\nCeiling: %d, %d, %d\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2]);
+		printf("\nCeiling: %d, %d, %d, %d(Transparence)\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
 	if (textures->floor)
-		printf("Floor: %d, %d, %d\n", textures->floor[0], textures->floor[1], textures->floor[2]);
+		printf("Floor: %d, %d, %d, %d(Transparence)\n", textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
 	return (0);
 }
 

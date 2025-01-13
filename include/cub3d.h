@@ -74,6 +74,8 @@ typedef struct s_map
 	char			content;
 	struct s_map	*nxt;
 	struct s_map	*prv;
+	// struct s_map	*up;  implementar
+	// struct s_map	*down;  implementar
 }	t_map;
 
 typedef struct s_cam
@@ -92,8 +94,8 @@ typedef struct s_texinfo
 	char			*south;
 	char			*west;
 	char			*east;
-	int				*floor;
-	int				*ceiling;
+	int				*floor; // implementar 4 posição para transparência, fixar 255
+	int				*ceiling; // implementar 4 posição para transparência, fizar 255
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
 	int				size;

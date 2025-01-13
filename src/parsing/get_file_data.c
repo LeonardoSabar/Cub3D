@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/13 00:21:45 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 01:48:39 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,19 @@ static int fill_direction_textures(t_texinfo *textures, char *line, int j)
 
 static int print_texture(t_texinfo *textures)
 {
-	printf("North: %s\n", textures->north);
+	printf("\nNorth: %s\n", textures->north);
 	printf("South: %s\n", textures->south);
 	printf("West: %s\n", textures->west);
 	printf("East: %s\n", textures->east);
+	return (0);
+}
+
+static int print_floor_ceiling(t_texinfo *textures)
+{
+	if (textures->ceiling)
+		printf("\nCeiling: %d, %d, %d\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2]);
+	if (textures->floor)
+		printf("Floor: %d, %d, %d\n", textures->floor[0], textures->floor[1], textures->floor[2]);
 	return (0);
 }
 
@@ -116,13 +125,16 @@ int	get_file_data(t_game *data, char **map)
 		while (map[i][j])
 		{
 			ret = ignore_whitespaces_get_info(data, map, i, j);
-			print_texture(&data->texinfo); // retirar
 			if (ret == 3)
 				break ;
 			else if (ret == 1)
 				return (1);
 			else if (ret == 0)
+			{
+				print_texture(&data->texinfo); // retirar
+				print_floor_ceiling(&data->texinfo); // retirar
 				return (0);
+			}
 			j++;
 		}
 		i++;

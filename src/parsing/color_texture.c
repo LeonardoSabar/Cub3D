@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/13 00:25:01 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 01:49:49 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static int *copy_into_rgb_array(char **rgb_to_convert, int *rgb)
     while (rgb_to_convert[i])
     {
         rgb[i] = ft_atoi(rgb_to_convert[i]);
+        printf(Y "RGB[%d]: %d\n" RST, i, rgb[i]); // retirar
         if (rgb[i] < 0 || rgb[i] > 255 || no_digit(rgb_to_convert[i]))
         {
             free_tab((void **)rgb_to_convert);
@@ -54,7 +55,6 @@ static int	*set_rgb_colors(char *line)
 	int		*rgb;
 	int		count;
     
-    printf(B "Passou aqui\n" RST); // retirar
 	rgb_to_convert = ft_split(line, ',');
 	count = 0;
 	while (rgb_to_convert[count])
@@ -73,17 +73,9 @@ static int	*set_rgb_colors(char *line)
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
 }
 
-int print_floor_ceiling(t_texinfo *textures)
-{
-    printf("Floor: %d, %d, %d\n", textures->floor[0], textures->floor[1], textures->floor[2]);
-    printf("Ceiling: %d, %d, %d\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2]);
-    return (0);
-}
-
 int fill_color_textures(t_texinfo *textures, char *line, int j)
 {
-    printf(B "Passou aqui\n" RST); // retirar
-    printf("Line: %s\n", line); // retirar
+    printf("\nLine: %c\n", line[j]); // retirar
     if (line[j] == 'C' && line[j + 1] && ft_isprint(line[j + 1]))
     {
         if (!textures->ceiling)

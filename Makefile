@@ -6,7 +6,7 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2025/01/13 01:56:38 by leobarbo         ###   ########.fr        #
+#    Updated: 2025/01/13 02:06:05 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ $(OBJ_PATH):
 	mkdir -p $(OBJ_PATH)
 
 $(OBJ_PATH)/%.o: $(SRCS_PATH)%.c | $(OBJ_PATH)
-	@mkdir -p $(@D) # Criar diretórios parentes se necessário
+	@mkdir -p $(@D)
 	$(CC) $(HEADERS) $(CFLAGS) -o $@ -c $<
 
 libft:

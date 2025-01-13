@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/12 23:45:11 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 00:25:01 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ static int	*set_rgb_colors(char *line)
 	char	**rgb_to_convert;
 	int		*rgb;
 	int		count;
-
+    
+    printf(B "Passou aqui\n" RST); // retirar
 	rgb_to_convert = ft_split(line, ',');
 	count = 0;
 	while (rgb_to_convert[count])
@@ -81,9 +82,10 @@ int print_floor_ceiling(t_texinfo *textures)
 
 int fill_color_textures(t_texinfo *textures, char *line, int j)
 {
+    printf(B "Passou aqui\n" RST); // retirar
+    printf("Line: %s\n", line); // retirar
     if (line[j] == 'C' && line[j + 1] && ft_isprint(line[j + 1]))
     {
-        print_floor_ceiling(textures); // retirar
         if (!textures->ceiling)
         {
             textures->ceiling = set_rgb_colors(line + j + 1);

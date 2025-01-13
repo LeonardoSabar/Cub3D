@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/12 23:40:51 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/13 00:21:45 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static char *get_texture_path(char *line, int j)
     while (line[j] && (line[j] != ' ' && line[j] != '\t' && line[j] != '\n'))
         path[i++] = line[j++];
     path[i] = '\0';
-    printf("Caminho extraído: '%s'\n", path); // Debug para verificar o caminho extraído(remover)
     while (line[j] && (line[j] == ' ' || line[j] == '\t'))
         j++;
     
@@ -80,17 +79,17 @@ static int	ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 		j++;
 	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
 	{
+		if (map[i][j] == 'F' || map[i][j] == 'C')
+		{
+			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
+				return (1);
+			return (3);
+		}
 		if (map[i][j + 1] && ft_isprint(map[i][j + 1])
 			&& !ft_isdigit(map[i][j]))
 		{
 			if (fill_direction_textures(&data->texinfo, map[i], j) == 2)
 				return (err_msg("Invalid texture(s)", 1));
-			return (3);
-		}
-		else
-		{
-			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
-				return (1);
 			return (3);
 		}
 	}

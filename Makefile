@@ -6,7 +6,7 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2025/01/12 19:46:04 by leobarbo         ###   ########.fr        #
+#    Updated: 2025/01/13 01:56:38 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ LIBFT       := ./lib/libft
 LIBMLX42_PATH := ./lib/MLX42
 LIBMLX_REPO := https://github.com/codam-coding-college/MLX42.git
 SRCS_PATH   := ./src/
+OBJ_PATH    := ./obj
 .SILENT:
 
 GREEN = \033[32m
@@ -26,9 +27,16 @@ RESET = \033[0m
 HEADERS     := -I ./include -I $(LIBMLX42_PATH)/include -I $(LIBFT)/include
 LIBS        := ${LIBFT}/libft.a $(LIBMLX42_PATH)/build/libmlx42.a -lglfw -ldl -lXext -lX11 -lm
 SRCS        := $(shell find $(SRCS_PATH) -type f -name "*.c")
-OBJS        := $(SRCS:%.c=%.o)
+OBJS        := $(patsubst $(SRCS_PATH)%.c,$(OBJ_PATH)/%.o,$(SRCS))
 
-all: libmlx42 libft $(NAME)
+all: $(OBJ_PATH) libmlx42 libft $(NAME)
+
+$(OBJ_PATH):
+	mkdir -p $(OBJ_PATH)
+
+$(OBJ_PATH)/%.o: $(SRCS_PATH)%.c | $(OBJ_PATH)
+	@mkdir -p $(@D) # Criar diretórios parentes se necessário
+	$(CC) $(HEADERS) $(CFLAGS) -o $@ -c $<
 
 libft:
 	@$(MAKE) -C $(LIBFT)
@@ -40,16 +48,13 @@ libmlx42: $(LIBMLX42_PATH)
 	cmake -S $(LIBMLX42_PATH) -B $(LIBMLX42_PATH)/build
 	make -C $(LIBMLX42_PATH)/build -j4
 
-%.o: %.c
-	$(CC) $(HEADERS) $(CFLAGS) -o $@ -c $<
-
 $(NAME): $(OBJS)
 	printf "$(YELLOW)Compiling...$(RESET)\n"
 	$(CC) $(OBJS) $(LIBS) $(HEADERS) -o $(NAME)
 	printf "$(GREEN)Done!$(RESET)\n"
 
 clean:
-	rm -rf $(OBJS)
+	rm -rf $(OBJ_PATH)
 	rm -rf $(LIBMLX42_PATH)/build
 
 fclean: clean

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:51:54 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/30 17:30:24 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/14 23:15:08 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void free_resources(t_game *data)
 
     if (data->cam)
         free(data->cam);
-    current = data->map;
+    current = data->map_position;
     while (current)
     {
         tmp = current->nxt;

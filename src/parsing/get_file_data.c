@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/13 23:09:59 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/15 02:31:40 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int fill_direction_textures(t_texinfo *textures, char *line, int j)
     else
 	{
 		if (textures->north && textures->south && textures->west && textures->east)
-            return 0;
+            return (0);
         return (2);
 	}
 	return (0);
@@ -88,17 +88,17 @@ static int	ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 		j++;
 	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
 	{
-		if (map[i][j] == 'F' || map[i][j] == 'C')
-		{
-			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
-				return (1);
-			return (3);
-		}
 		if (map[i][j + 1] && ft_isprint(map[i][j + 1])
 			&& !ft_isdigit(map[i][j]))
 		{
 			if (fill_direction_textures(&data->texinfo, map[i], j) == 2)
 				return (err_msg("Invalid texture(s)", 1));
+			return (3);
+		}
+		if (map[i][j] == 'F' || map[i][j] == 'C')
+		{
+			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
+				return (1);
 			return (3);
 		}
 	}

@@ -117,19 +117,36 @@ typedef struct s_mapinfo
 	int			index_end_of_map;
 }	t_mapinfo;
 
+typedef struct s_player
+{
+	char	dir;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
+	int		has_moved;
+	int		move_x;
+	int		move_y;
+	int		rotate;
+}	t_player;
+
 typedef struct s_game
 {
-	t_texinfo	texinfo;
-    t_mapinfo	mapinfo;
 	int			is_horizon;
 	char		**parse_map;
+	char		**map;
+	t_player	player;
+	t_texinfo	texinfo;
+    t_mapinfo	mapinfo;
 	mlx_image_t	*img;
 	mlx_image_t	*game;
 	mlx_image_t	*p_img;
 	mlx_image_t	*bg_img;
 	t_tile		tile;
 	mlx_t		*mlx_on;
-	t_map		*map;
+	t_map		*map_position;
 	t_cam		*cam;
 	t_ray		ray;
 	t_obj		obj;
@@ -144,7 +161,6 @@ void    clean_exit(t_game *data, int code);
 void    free_tab(void **tab);
 void    init_data(t_game *data);
 int     fill_color_textures(t_texinfo *textures, char *line, int j);
-int     create_map(t_game *data, char **file, int i);
 int     parse_file(char *file);
 int     parse_data(char *path, t_game *data);
 size_t  find_biggest_len(t_mapinfo *map, int i);
@@ -153,8 +169,11 @@ int     err_msg(char *message, int code);
 int     is_blank_line(const char *line);
 int     get_file_data(t_game *data, char **file);
 void	free_resources(t_game *data);
-
+int		parse_map(t_game *data, char **map);
 char   *get_next_line(int fd);
+int		check_map_sides(t_mapinfo *map, char **map_tab);
+int		create_map(t_game *data, char **file, int i);
+int     parsing(t_game *data, char **argv);
 
 #endif
 

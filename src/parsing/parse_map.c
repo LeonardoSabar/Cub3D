@@ -6,39 +6,43 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/14 23:00:49 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/16 16:52:49 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	check_map_elements(t_game *data, char **map_tab)
+static int check_map_elements(t_game *data, char **map_tab)
 {
-	int	i;
-	int	j;
+    int i;
+    int j;
 
 	i = 0;
-	data->player.dir = '0';
-	while (map_tab[i] != NULL)
-	{
-		j = 0;
-		while (map_tab[i][j])
-		{
-			while (data->map[i][j] == ' ' || data->map[i][j] == '\t'
-			|| data->map[i][j] == '\r'
-			|| data->map[i][j] == '\v' || data->map[i][j] == '\f')
-				j++;
-			if (!(ft_strchr("10NSEW", map_tab[i][j])))
-				return (err_msg("Invalid map element", FAILURE));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir != '0')
-				return (err_msg("Player position is not unique", FAILURE));
-			if (ft_strchr("NSEW", map_tab[i][j]) && data->player.dir == '0')
-				data->player.dir = map_tab[i][j];
-			j++;
-		}
-		i++;
-	}
-	return (SUCCESS);
+    data->player.dir = '0';
+    while (map_tab[i] != NULL)
+    {
+        j = 0;
+        while (map_tab[i][j])
+        {
+            while (map_tab[i][j] && (map_tab[i][j] == ' ' || 
+                   map_tab[i][j] == '\t' || map_tab[i][j] == '\r' || 
+                   map_tab[i][j] == '\v' || map_tab[i][j] == '\f'))
+                j++;
+            if (map_tab[i][j] == '\0')
+                break;
+            if (!(ft_strchr("10NSEW", map_tab[i][j])))
+                return (err_msg("Invalid map element", FAILURE));
+            if (ft_strchr("NSEW", map_tab[i][j])) 
+            {
+                if (data->player.dir != '0') 
+                    return (err_msg("Player position is not unique", FAILURE));
+                data->player.dir = map_tab[i][j];
+			}
+            j++;
+        }
+        i++;
+    }
+    return (SUCCESS); // Se todas as verificações passaram
 }
 
 static int	check_position_is_valid(t_game *data, char **map_tab)
@@ -48,14 +52,15 @@ static int	check_position_is_valid(t_game *data, char **map_tab)
 
 	i = (int)data->player.pos_y;
 	j = (int)data->player.pos_x;
-	if (ft_strlen(map_tab[i - 1]) < (size_t)j
-		|| ft_strlen(map_tab[i + 1]) < (size_t)j
-		|| is_a_white_space(map_tab[i][j - 1]) == SUCCESS
-		|| is_a_white_space(map_tab[i][j + 1]) == SUCCESS
-		|| is_a_white_space(map_tab[i - 1][j]) == SUCCESS
-		|| is_a_white_space(map_tab[i + 1][j]) == SUCCESS)
-		return (FAILURE);
-	return (SUCCESS);
+	 if (ft_strlen(map_tab[i - 1]) < (size_t)j || 
+        ft_strlen(map_tab[i + 1]) < (size_t)j ||
+        is_a_white_space(map_tab[i][j - 1]) == SUCCESS ||
+        is_a_white_space(map_tab[i][j + 1]) == SUCCESS ||
+        is_a_white_space(map_tab[i - 1][j]) == SUCCESS ||
+        is_a_white_space(map_tab[i + 1][j]) == SUCCESS)
+        return (FAILURE);
+
+    return (SUCCESS);
 }
 
 static int	check_player_position(t_game *data, char **map_tab)

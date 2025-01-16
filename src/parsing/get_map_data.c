@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:48:30 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/14 23:58:18 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:23:23 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ static int count_map_lines(t_game *data, char **file, int i)
     return (i - index_value);
 }
 
-
 static int fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
 {
-    int i = 0;
+    int i;
 
+    i = 0;
     mapinfo->width = find_biggest_len(mapinfo, index);
     while (i < mapinfo->height)
     {

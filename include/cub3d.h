@@ -174,6 +174,7 @@ char   *get_next_line(int fd);
 int		check_map_sides(t_mapinfo *map, char **map_tab);
 int		create_map(t_game *data, char **file, int i);
 int     parsing(t_game *data, char **argv);
+int		parse_textures(t_texinfo *textures);
 
 #endif
 

@@ -6,27 +6,38 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:07:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/14 23:07:28 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/16 13:27:34 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int	check_top_or_bottom(char **map_tab, int i, int j)
+
+
+static int check_top_or_bottom(char **map_tab, int i, size_t j)
 {
-	if (!map_tab || !map_tab[i] || !map_tab[i][j])
-		return (FAILURE);
-	while (map_tab[i][j] == ' ' || map_tab[i][j] == '\t'
-	|| map_tab[i][j] == '\r' || map_tab[i][j] == '\v'
-	|| map_tab[i][j] == '\f')
-		j++;
-	while (map_tab[i][j])
-	{
-		if (map_tab[i][j] != '1')
+    if (!map_tab || !map_tab[i]) 
+        return (FAILURE);
+    while (map_tab[i][j] && 
+           (map_tab[i][j] == ' ' || map_tab[i][j] == '\t' || 
+            map_tab[i][j] == '\r' || map_tab[i][j] == '\n' || 
+            map_tab[i][j] == '\v' || map_tab[i][j] == '\f'))
+        j++;
+    if (j >= ft_strlen(map_tab[i])) {
+        return (FAILURE);
+    }
+    while (map_tab[i][j])
+    {
+        if (map_tab[i][j] == '\r')
+		{
+            j++;
+            continue;
+        }
+        if (map_tab[i][j] != '1') 
 			return (FAILURE);
-		j++;
-	}
-	return (SUCCESS);
+        j++;
+    }
+    return (SUCCESS);
 }
 
 int	check_map_sides(t_mapinfo *map, char **map_tab)
@@ -40,6 +51,8 @@ int	check_map_sides(t_mapinfo *map, char **map_tab)
 	while (i < (map->height - 1))
 	{
 		j = ft_strlen(map_tab[i]) - 1;
+		if (map_tab[i][j] == '\r') // resolve problema de '\r' no final da linha
+			j--;
 		if (map_tab[i][j] != '1')
 			return (FAILURE);
 		i++;

@@ -6,12 +6,20 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/15 02:31:40 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:53:17 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
+static int print_texture(t_texinfo *textures)
+{
+	printf("\nNorth: %s\n", textures->north);
+	printf("South: %s\n", textures->south);
+	printf("West: %s\n", textures->west);
+	printf("East: %s\n", textures->east);
+	return (0);
+}
 static char *get_texture_path(char *line, int j)
 {
     int len;
@@ -43,8 +51,9 @@ static char *get_texture_path(char *line, int j)
 
 static int fill_direction_textures(t_texinfo *textures, char *line, int j)
 {
-    size_t line_length = ft_strlen(line); 
-
+    size_t line_length;
+	
+	line_length = ft_strlen(line); 
     if ((size_t)(j + 2) >= line_length || !ft_isprint(line[j + 2]))
         return (2);
     if (line[j] == 'N' && line[j + 1] == 'O' && !(textures->north))
@@ -64,14 +73,6 @@ static int fill_direction_textures(t_texinfo *textures, char *line, int j)
 	return (0);
 }
 
-static int print_texture(t_texinfo *textures)
-{
-	printf("\nNorth: %s\n", textures->north);
-	printf("South: %s\n", textures->south);
-	printf("West: %s\n", textures->west);
-	printf("East: %s\n", textures->east);
-	return (0);
-}
 
 static int print_floor_ceiling(t_texinfo *textures)
 {
@@ -82,33 +83,37 @@ static int print_floor_ceiling(t_texinfo *textures)
 	return (0);
 }
 
-static int	ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
+static int ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 {
-	while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
-		j++;
-	if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
-	{
-		if (map[i][j + 1] && ft_isprint(map[i][j + 1])
-			&& !ft_isdigit(map[i][j]))
-		{
-			if (fill_direction_textures(&data->texinfo, map[i], j) == 2)
-				return (err_msg("Invalid texture(s)", 1));
-			return (3);
-		}
-		if (map[i][j] == 'F' || map[i][j] == 'C')
-		{
-			if (fill_color_textures(&data->texinfo, map[i], j) == 2)
-				return (1);
-			return (3);
-		}
-	}
-	else if (ft_isdigit(map[i][j]))
-	{
-		if (create_map(data, map, i) == 1)
-			return (err_msg("Map description is either wrong or incomplete", 1));
-		return (0);
-	}
-	return (4);
+	printf(M "\nMap[%d][%d]: %c\n" RST, i, j, map[i][j]); // retirar
+    while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
+        j++;
+    if (map[i][j] == '\0') 
+        return (4);
+
+    if (ft_isprint(map[i][j]) && !ft_isdigit(map[i][j]))
+    {
+        if (map[i][j + 1] && ft_isprint(map[i][j + 1]))
+        {
+            if (fill_direction_textures(&data->texinfo, map[i], j) == 2)
+                return (err_msg("Invalid texture(s)", 1));
+            printf(RED "Entrou!!!" RST); // Depuração
+            return (3);
+        }
+        if (map[i][j] == 'F' || map[i][j] == 'C')
+        {
+            if (fill_color_textures(&data->texinfo, map[i], j) == 2)
+                return (1);
+            return (3);
+        }
+    }
+    else if (ft_isdigit(map[i][j]))
+    {
+        if (create_map(data, map, i) == 1)
+            return (err_msg("Map description is either wrong or incomplete", 1));
+        return (0);
+    }
+    return (4);
 }
 
 
@@ -118,6 +123,7 @@ int	get_file_data(t_game *data, char **map)
 	int	j;
 	int	ret;
 
+	
 	i = 0;
 	while (map[i])
 	{

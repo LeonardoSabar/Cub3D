@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/15 01:06:18 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/16 18:47:48 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	parsing(t_game *data, char **argv)
 		return (ERROR);
 	printf(RED "Data parsed\n" RST); // Retirar
 	print_map(data); // retirar
-	if (get_file_data(data, data->mapinfo.file) == 1)
+	if (get_file_data(data, data->mapinfo.file) != 0)
 		return (ERROR);
 	printf(RED "File data parsed\n" RST); // Retirar
 	if (parse_map(data, data->map) != 0)
 		return (ERROR);
 	printf(RED "Map parsed\n" RST); // Retirar
-	// parse_textures();
-	// parse_sprites();
-	// parse_colors();
+	if (parse_textures(&data->texinfo) != 0)
+		return (ERROR);
+	printf(RED "Textures parsed\n" RST); // Retirar
 	return (SUCCESS);
 }

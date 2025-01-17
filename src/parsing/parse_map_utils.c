@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:07:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 13:27:34 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:28:42 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	check_map_sides(t_mapinfo *map, char **map_tab)
 	while (i < (map->height - 1))
 	{
 		j = ft_strlen(map_tab[i]) - 1;
-		if (map_tab[i][j] == '\r') // resolve problema de '\r' no final da linha
+		if (map_tab[i][j] == '\r') // resolve problema de '\r' no final da linha // Manter?
 			j--;
 		if (map_tab[i][j] != '1')
 			return (FAILURE);

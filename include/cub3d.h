@@ -13,6 +13,9 @@
 # include <math.h>
 # include <errno.h>
 
+# define DEBUG 1
+# define DEBUGHARD 1
+
 # define SUCCESS 0
 # define ERROR 1
 
@@ -74,8 +77,8 @@ typedef struct s_map
 	char			content;
 	struct s_map	*nxt;
 	struct s_map	*prv;
-	// struct s_map	*up;  implementar
-	// struct s_map	*down;  implementar
+	struct s_map	*up;
+	struct s_map	*down;
 }	t_map;
 
 typedef struct s_cam
@@ -175,6 +178,7 @@ int		check_map_sides(t_mapinfo *map, char **map_tab);
 int		create_map(t_game *data, char **file, int i);
 int     parsing(t_game *data, char **argv);
 int		parse_textures(t_texinfo *textures);
+int		get_map_list_node(t_game *data, char **map_tab);
 
 #endif
 

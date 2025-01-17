@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 00:53:06 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:33:55 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 static int print_floor_ceiling(t_texinfo *textures)
 {
 	if (textures->ceiling)
-		printf("\nCeiling: %d, %d, %d, %d(Transparence)\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
+		printf( O "\nCeiling: %d, %d, %d, %d(Transparence)\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
 	if (textures->floor)
-		printf("Floor: %d, %d, %d, %d(Transparence)\n", textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
+		printf("Floor: %d, %d, %d, %d(Transparence)\n" RST, textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
 	return (0);
 }
 
-static int print_texture(t_texinfo *textures)
+static int print_texture(t_texinfo *textures) // Função para Debug // Retirar
 {
-	printf("\nNorth: %s\n", textures->north);
-	printf("South: %s\n", textures->south);
-	printf("West: %s\n", textures->west);
-	printf("East: %s\n", textures->east);
+	printf(O"\nNorth: %s\n" RST, textures->north);
+	printf(O"South: %s\n" RST, textures->south);
+	printf(O"West: %s\n" RST, textures->west);
+	printf(O"East: %s\n" RST, textures->east);
 	return (0);
 }
 
-static int print_map(t_game *data)
+static int print_map(t_game *data) // Função para Debug // Retirar
 {
     int i;
     int j;
@@ -107,7 +107,8 @@ static int fill_direction_textures(t_texinfo *textures, char *line, int j)
 
 static int ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
 {
-	printf(M "\nMap[%d][%d]: %c\n" RST, i, j, map[i][j]); // retirar
+    if (DEBUGHARD == 1) // retirar
+	    printf(M "\nMap[%d][%d]: %c\n" RST, i, j, map[i][j]); // retirar
     while (map[i][j] == ' ' || map[i][j] == '\t' || map[i][j] == '\n')
         j++;
     if (map[i][j] == '\0') 
@@ -133,7 +134,8 @@ static int ignore_whitespaces_get_info(t_game *data, char **map, int i, int j)
     {
         if (create_map(data, map, i) == ERROR)
             return (err_msg(Y "Map description is either wrong or incomplete" RST, ERROR));
-        print_map(data); // retirar
+        if (DEBUGHARD == 1) // retirar
+            print_map(data); // retirar
         return (SUCCESS);
     }
     return (4);
@@ -160,7 +162,7 @@ static int get_floor_and_ceiling(t_game *data, char **map)
         }
         i++;
     }
-    return (4);
+    return (SUCCESS);
 }
 
 int	get_file_data(t_game *data, char **map)
@@ -182,10 +184,13 @@ int	get_file_data(t_game *data, char **map)
 				return (ERROR);
 			else if (ret == SUCCESS)
 			{
-				print_texture(&data->texinfo); // retirar
-                get_floor_and_ceiling(data, map);
-				print_floor_ceiling(&data->texinfo); // retirar
-				return (0);
+                if (DEBUGHARD == 1) // retirar
+				    print_texture(&data->texinfo); // retirar
+                if (get_floor_and_ceiling(data, map) == ERROR)
+                    return (ERROR);
+                if (DEBUGHARD == 1) // retirar
+				    print_floor_ceiling(&data->texinfo); // retirar
+				return (SUCCESS);
 			}
 			j++;
 		}

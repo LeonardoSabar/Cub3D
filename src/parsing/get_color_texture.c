@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color_texture.c                                    :+:      :+:    :+:   */
+/*   get_color_texture.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 00:53:39 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:25:57 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ static int	*set_rgb_colors(char *line)
 
 int	fill_color_textures(t_texinfo *textures, char *line, int j)
 {
-    printf("\nLine: %c\n", line[j]); // retirar
+	if (DEBUGHARD == 1) // retirar
+    	printf(O"\nLine: %c processed\n" RST, line[j]); // retirar
 	if (line[j] == 'C')
 	{
 		textures->ceiling = set_rgb_colors(line + j + 1);

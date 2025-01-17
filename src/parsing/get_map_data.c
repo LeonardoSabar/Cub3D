@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:48:30 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 00:52:45 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:36:25 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ static int get_map_info(t_game *data, char **file, int i)
     }
     return (SUCCESS);
 }
+
 
 static void change_space_into_wall(t_game *data)
 {

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 00:57:20 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:26:01 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int check_map_elements(t_game *data, char **map_tab)
         }
         i++;
     }
-    return (SUCCESS); // Se todas as verificações passaram
+    return (SUCCESS);
 }
 
 static int	check_position_is_valid(t_game *data, char **map_tab)

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 01:07:18 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 13:38:18 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,18 +49,14 @@ int	parse_file(char *arg, bool cub)
 {
 	int	fd;
 
+	
+	if (DEBUGHARD == 1) // Retirar
+		printf(RED "Parsing arg file: " RST "%s\n", arg); // Retirar
 	if (is_dir(arg))
 		return (err_msg(Y "The argument is a directory!" RST, 1));
 	fd = open(arg, O_RDONLY);
 	if (fd == -1)
-	{
-		/*if (errno == EACCES)
-			return (err_msg("Permission denied to open the file.", 1));
-		else if (errno == ENOENT)
-			return (err_msg("File does not exist.", 1));
-		else*/
-			return (err_msg(strerror(errno), 1));
-	}
+		return (err_msg(Y "Error opening file" RST, 1));
 	if (cub && !parse_cub_extension(arg))
 		return (err_msg(Y "Not a .cub file" RST, 1));
 	if (!cub && parse_xpm_extension(arg))

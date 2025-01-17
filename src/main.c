@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:53:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/15 00:18:19 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 12:24:50 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,5 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	if (parsing(&data, argv) == ERROR)
 		clean_exit(&data, 1);
-
-
-
-	// init();
-	// render();
-	// game_loop();
-	// free();
 	return (0);
 }

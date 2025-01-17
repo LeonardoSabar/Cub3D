@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 18:47:48 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:37:08 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,21 @@ static int print_map(t_game *data)
   
 int	parsing(t_game *data, char **argv)
 {
-    if (parse_file(argv[1]) != 0)
+    if (parse_file(argv[1], true) != 0)
 		return (ERROR);
-	printf(RED "File parsed\n" RST); // Retirar
+	printf(RED "\n+++++++++    File parsed    +++++++++\n" RST); // Retirar
 	if (parse_data(argv[1], data) != 0)
 		return (ERROR);
-	printf(RED "Data parsed\n" RST); // Retirar
+	printf(RED "\n+++++++++    Data parsed    +++++++++\n" RST); // Retirar
 	print_map(data); // retirar
 	if (get_file_data(data, data->mapinfo.file) != 0)
 		return (ERROR);
-	printf(RED "File data parsed\n" RST); // Retirar
+	printf(RED "\n+++++++++ File data parsed +++++++++\n" RST); // Retirar
 	if (parse_map(data, data->map) != 0)
 		return (ERROR);
-	printf(RED "Map parsed\n" RST); // Retirar
+	printf(RED "\n+++++++++    Map parsed    +++++++++\n" RST); // Retirar
 	if (parse_textures(&data->texinfo) != 0)
 		return (ERROR);
-	printf(RED "Textures parsed\n" RST); // Retirar
+	printf(RED "\n+++++++++    Textures parsed    +++++++++\n" RST); // Retirar
 	return (SUCCESS);
 }

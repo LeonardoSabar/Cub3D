@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 20:06:03 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 18:50:08 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:51:27 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ static int get_number_of_lines(char *path)
 	char *line;
 
 	if (fd < 0)
-		return (err_msg("Error opening file to count lines", 1));
+		return (err_msg(Y "Error opening file to count lines" RST, 1));
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		line_count++;
@@ -111,7 +111,7 @@ static int get_number_of_lines(char *path)
 	close(fd);
 
 	if (line_count == 0)
-		return (err_msg("Empty file", 1));
+		return (err_msg(Y "Empty file" RST, 1));
 
 	return (line_count);
 }
@@ -122,7 +122,7 @@ static int read_line_to_tab(int row, char *line, t_game *data)
 	if (!data->mapinfo.file[row])
 	{
 		free_tab((void **)data->mapinfo.file);
-		return (err_msg("Memory allocation failure", 1));
+		return (err_msg(Y "Memory allocation failure" RST, 1));
 	}
 	ft_strlcpy(data->mapinfo.file[row], line, ft_strlen(line) + 1);
 	return (SUCCESS);
@@ -133,7 +133,7 @@ static int fill_tab(t_game *data)
 	char *line;
 	int row = 0;
 	if (!data->mapinfo.file || data->mapinfo.line_count == 0)
-		return (err_msg("Error: Map file is not allocated or empty", 1));
+		return (err_msg(Y "Map file is not allocated or empty" RST, 1));
 
 	while ((line = get_next_line(data->mapinfo.fd)))
 	{
@@ -156,12 +156,12 @@ int parse_data(char *path, t_game *data)
 		return (ERROR);
 	data->mapinfo.file = ft_calloc(data->mapinfo.line_count + 1, sizeof(char *));
 	if (!data->mapinfo.file)
-		return (err_msg("Memory allocation failure", 1));
+		return (err_msg(Y "Memory allocation failure" RST, 1));
 	data->mapinfo.fd = open(path, O_RDONLY);
 	if (data->mapinfo.fd < 0)
 	{
 		free_tab((void **)data->mapinfo.file);
-		return (err_msg("Error opening file", 1));
+		return (err_msg(Y "Error opening file" RST, 1));
 	}
 	if (fill_tab(data) == ERROR)
 	{

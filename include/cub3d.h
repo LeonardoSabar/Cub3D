@@ -161,7 +161,7 @@ void    clean_exit(t_game *data, int code);
 void    free_tab(void **tab);
 void    init_data(t_game *data);
 int     fill_color_textures(t_texinfo *textures, char *line, int j);
-int     parse_file(char *file);
+int     parse_file(char *file, bool cub);
 int     parse_data(char *path, t_game *data);
 size_t  find_biggest_len(t_mapinfo *map, int i);
 int     is_a_white_space(char c);

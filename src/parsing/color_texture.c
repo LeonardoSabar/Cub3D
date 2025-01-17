@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 17:27:43 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:53:39 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	*set_rgb_colors(char *line)
 	rgb = malloc(sizeof(int) * 4);
 	if (!rgb)
 	{
-		err_msg("Could not allocate memory", 0);
+		err_msg(Y "Could not allocate memory" RST, 0);
 		return (0);
 	}
 	return (copy_into_rgb_array(rgb_to_convert, rgb));
@@ -80,17 +80,17 @@ int	fill_color_textures(t_texinfo *textures, char *line, int j)
 		textures->ceiling = set_rgb_colors(line + j + 1);
         textures->ceiling[3] = 255;
 		if (textures->ceiling == 0)
-			return (err_msg("Invalid ceiling RGB color", 2));
+			return (err_msg(Y "Invalid ceiling RGB color" RST, 2));
 	}
 	else if (line[j] == 'F')
 	{
 		textures->floor = set_rgb_colors(line + j + 1);
         textures->floor[3] = 255;
 		if (textures->floor == 0)
-			return (err_msg("Invalid floor RGB color", 2));
+			return (err_msg(Y "Invalid floor RGB color" RST, 2));
 	}
 	else
-		return (err_msg("Invalid floor/ceiling RGB color(s)", 2));
+		return (err_msg(Y "Invalid floor/ceiling RGB color(s)" RST, 2));
 	return (SUCCESS);
 }
 

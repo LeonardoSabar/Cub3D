@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:48:30 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 13:23:23 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:52:45 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
         {
             while (i > 0)
                 free(map_tab[--i]);
-            return (err_msg("Could not allocate memory", 1));
+            return (err_msg(Y "Could not allocate memory" RST, 1));
         }
         while (mapinfo->file[index][j] && mapinfo->file[index][j] != '\n')
         {
@@ -70,7 +70,7 @@ static int get_map_info(t_game *data, char **file, int i)
     data->mapinfo.height = count_map_lines(data, file, i);
     data->map = malloc(sizeof(char *) * (data->mapinfo.height + 1));
     if (!data->map)
-        return (err_msg("Could not allocate memory", 1));
+        return (err_msg(Y "Could not allocate memory"RST, 1));
     if (fill_map_tab(&data->mapinfo, data->map, i) == FAILURE)
     {
         free(data->map);

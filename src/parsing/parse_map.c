@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 16:52:49 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:57:20 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ static int check_map_elements(t_game *data, char **map_tab)
             if (map_tab[i][j] == '\0')
                 break;
             if (!(ft_strchr("10NSEW", map_tab[i][j])))
-                return (err_msg("Invalid map element", FAILURE));
+                return (err_msg(Y "Invalid map element" RST, FAILURE));
             if (ft_strchr("NSEW", map_tab[i][j])) 
             {
                 if (data->player.dir != '0') 
-                    return (err_msg("Player position is not unique", FAILURE));
+                    return (err_msg(Y "Player position is not unique" RST, FAILURE));
                 data->player.dir = map_tab[i][j];
 			}
             j++;
@@ -69,7 +69,7 @@ static int	check_player_position(t_game *data, char **map_tab)
 	int	j;
 
 	if (data->player.dir == '0')
-		return (err_msg("Player position is not defined", FAILURE));
+		return (err_msg(Y "Player position is not defined" RST, FAILURE));
 	i = 0;
 	while (map_tab[i])
 	{
@@ -87,7 +87,7 @@ static int	check_player_position(t_game *data, char **map_tab)
 		i++;
 	}
 	if (check_position_is_valid(data, map_tab) == FAILURE)
-		return (err_msg("Player position is not valid", FAILURE));
+		return (err_msg(Y "Player position is not valid" RST, FAILURE));
 	return (SUCCESS);
 }
 
@@ -116,16 +116,16 @@ static int	check_map_is_at_the_end(t_mapinfo *map)
 int	parse_map(t_game *data, char **map_tab)
 {
 	if (!data->map)
-		return (err_msg("Map is not defined", FAILURE));
+		return (err_msg(Y "Map is not defined" RST, FAILURE));
 	if (check_map_sides(&data->mapinfo, map_tab) == FAILURE)
-		return (err_msg("Map is not surrounded by walls", FAILURE));
+		return (err_msg(Y "Map is not surrounded by walls" RST, FAILURE));
 	if (data->mapinfo.height < 3)
-		return (err_msg("Map is too small", FAILURE));
+		return (err_msg(Y "Map is too small" RST, FAILURE));
 	if (check_map_elements(data, map_tab) == FAILURE)
 		return (FAILURE);
 	if (check_player_position(data, map_tab) == FAILURE)
 		return (FAILURE);
 	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
-		return (err_msg("Map is not at the end of the file", FAILURE));
+		return (err_msg(Y "Map is not at the end of the file" RST, FAILURE));
 	return (SUCCESS);
 }

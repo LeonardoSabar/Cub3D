@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/15 01:55:53 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:53:53 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void init_data(t_game *data)
     data->map_position = NULL;
     data->cam = malloc(sizeof(t_cam));
     if (!data->cam) {
-        err_msg("Failed to allocate memory for cam.", 1);
+        err_msg(Y "Failed to allocate memory for cam." RST, 1);
         exit(EXIT_FAILURE);
     }
     init_cam(data->cam);

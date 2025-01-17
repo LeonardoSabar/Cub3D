@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:38:32 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/15 01:31:51 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 00:54:42 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ void clean_exit(t_game *data, int code)
     */
     }
     printf(RED "Falta implementar a liberação de recursos" RST "\n"); // Retirar
-    ft_printf(RED "Resources freed. Exiting with code %d." RST "\n", code);
+    ft_printf(Y "Resources freed. Exiting with code %d." RST "\n", code);
     exit(code);
 }

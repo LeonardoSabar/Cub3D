@@ -6,11 +6,21 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 21:45:24 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/16 17:00:05 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/17 01:05:46 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
+
+
+static int print_floor_ceiling(t_texinfo *textures)
+{
+	if (textures->ceiling)
+		printf(Y"\nCeiling: %d, %d, %d, %d(Transparence)\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
+	if (textures->floor)
+		printf("Floor: %d, %d, %d, %d(Transparence)\n\n"RST, textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
+	return (0);
+}
 
 static int	check_valid_rgb(int *rgb)
 {
@@ -20,7 +30,7 @@ static int	check_valid_rgb(int *rgb)
 	while (i < 3)
 	{
 		if (rgb[i] < 0 || rgb[i] > 255)
-			return (err_msg("Invalid color value", FAILURE));
+			return (err_msg(Y "Invalid RGB color value" RST, FAILURE));
 		i++;
 	}
 	return (SUCCESS);
@@ -44,15 +54,14 @@ int	parse_textures(t_texinfo *textures)
 {
 	if (!textures->north || !textures->south || !textures->west
 		|| !textures->east)
-		return (err_msg("Missing texture path", FAILURE));
-	printf( O "Textures->floor: %ls\n", textures->floor); // Retirar
-	printf( O "Textures->ceiling: %ls\n", textures->ceiling); // Retirar
+		return (err_msg(Y "Missing texture path" RST, FAILURE));
+	print_floor_ceiling(textures); // Retirar
 	if (!textures->floor || !textures->ceiling)
-		return (err_msg("Missing color value", FAILURE));
-	if (parse_file(textures->north) == FAILURE
-		|| parse_file(textures->south) == FAILURE
-		|| parse_file(textures->west) == FAILURE
-		|| parse_file(textures->east) == FAILURE
+		return (err_msg(Y "Missing color value" RST, FAILURE));
+	if (parse_file(textures->north, false) == FAILURE
+		|| parse_file(textures->south, false) == FAILURE
+		|| parse_file(textures->west, false) == FAILURE
+		|| parse_file(textures->east, false) == FAILURE
 		|| check_valid_rgb(textures->floor) == FAILURE
 		|| check_valid_rgb(textures->ceiling) == FAILURE)
 		return (FAILURE);

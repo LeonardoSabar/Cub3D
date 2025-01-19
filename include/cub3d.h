@@ -14,7 +14,7 @@
 # include <errno.h>
 
 # define DEBUG 1
-# define DEBUGHARD 1
+# define DEBUGHARD 0
 
 # define SUCCESS 0
 # define ERROR 1
@@ -25,7 +25,7 @@
 # define ROT_SPEED 0.040
 # define MAX_MAP_W 480
 # define MAX_MAP_H 270
-# define CYAN 0x00FFFF
+# define CYAN 0x00FFFF // Usar colors.h
 
 # ifndef O_DIRECTORY
 #  define O_DIRECTORY 00200000
@@ -163,14 +163,13 @@ typedef struct s_game
 void    clean_exit(t_game *data, int code);
 void    free_tab(void **tab);
 void    init_data(t_game *data);
-int     fill_color_textures(t_texinfo *textures, char *line, int j);
+int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
 int     parse_file(char *file, bool cub);
 int     parse_data(char *path, t_game *data);
 size_t  find_biggest_len(t_mapinfo *map, int i);
 int     is_a_white_space(char c);
 int     err_msg(char *message, int code);
-int     is_blank_line(const char *line);
-int     get_file_data(t_game *data, char **file);
+int     get_map_elements(t_game *data, char **file);
 void	free_resources(t_game *data);
 int		parse_map(t_game *data, char **map);
 char   *get_next_line(int fd);

@@ -6,14 +6,14 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 13:25:57 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 04:25:10 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
 
-static bool	no_digit(char *str)
+static bool	is_all_non_numeric(char *str)
 {
 	int		i;
 	bool	found_no_digit;
@@ -29,7 +29,7 @@ static bool	no_digit(char *str)
 	return (found_no_digit);
 }
 
-static int	*copy_into_rgb_array(char **rgb_to_convert, int *rgb)
+static int	*convert_to_rgb_array(char **rgb_to_convert, int *rgb)
 {
 	int		i;
 
@@ -37,7 +37,7 @@ static int	*copy_into_rgb_array(char **rgb_to_convert, int *rgb)
 	while (rgb_to_convert[++i])
 	{
 		rgb[i] = ft_atoi(rgb_to_convert[i]);
-		if (rgb[i] == -1 || no_digit(rgb_to_convert[i]) == true)
+		if (rgb[i] == -1 || is_all_non_numeric(rgb_to_convert[i]) == true)
 		{
 			free_tab((void **)rgb_to_convert);
 			free(rgb);
@@ -48,7 +48,7 @@ static int	*copy_into_rgb_array(char **rgb_to_convert, int *rgb)
 	return (rgb);
 }
 
-static int	*set_rgb_colors(char *line)
+static int	*parse_rgb_color(char *line)
 {
 	char	**rgb_to_convert;
 	int		*rgb;
@@ -69,23 +69,23 @@ static int	*set_rgb_colors(char *line)
 		err_msg(Y "Could not allocate memory" RST, 0);
 		return (0);
 	}
-	return (copy_into_rgb_array(rgb_to_convert, rgb));
+	return (convert_to_rgb_array(rgb_to_convert, rgb));
 }
 
-int	fill_color_textures(t_texinfo *textures, char *line, int j)
+int	set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j)
 {
 	if (DEBUGHARD == 1) // retirar
     	printf(O"\nLine: %c processed\n" RST, line[j]); // retirar
 	if (line[j] == 'C')
 	{
-		textures->ceiling = set_rgb_colors(line + j + 1);
+		textures->ceiling = parse_rgb_color(line + j + 1);
         textures->ceiling[3] = 255;
 		if (textures->ceiling == 0)
 			return (err_msg(Y "Invalid ceiling RGB color" RST, 2));
 	}
 	else if (line[j] == 'F')
 	{
-		textures->floor = set_rgb_colors(line + j + 1);
+		textures->floor = parse_rgb_color(line + j + 1);
         textures->floor[3] = 255;
 		if (textures->floor == 0)
 			return (err_msg(Y "Invalid floor RGB color" RST, 2));

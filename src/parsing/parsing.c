@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 13:22:12 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 04:24:18 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,19 @@ int	parsing(t_game *data, char **argv)
     if (parse_file(argv[1], true) != 0)
 		return (ERROR);
 	if (DEBUG == 1)
-		printf(RED "\n+++++++++    File parsed    +++++++++\n" RST); // Retirar
+		printf(RED "\n++++++++    File  parsed    ++++++++\n" RST); // Retirar
 	if (parse_data(argv[1], data) != 0)
 		return (ERROR);
 	if (DEBUG == 1)
 	{
-		printf(RED "\n+++++++++    Data parsed    +++++++++\n" RST); // Retirar
+		printf(RED "\n++++++++    Data  parsed    ++++++++\n" RST); // Retirar
 		if (DEBUGHARD == 1)
 			print_map(data); // retirar
 	}
-	if (get_file_data(data, data->mapinfo.file) != 0)
+	if (get_map_elements(data, data->mapinfo.file) != 0)
 		return (ERROR);
 	if (DEBUG == 1)
-		printf(RED "\n+++++++++ File data parsed +++++++++\n" RST); // Retirar
+		printf(RED "\n++++++++ Map elements parsed +++++++\n" RST); // Retirar
 	if (parse_map(data, data->map) != 0)
 		return (ERROR);
 	if (DEBUG == 1)
@@ -68,13 +68,13 @@ int	parsing(t_game *data, char **argv)
 		return (ERROR);
 	if (DEBUG == 1)
 	{
-		printf(RED "\n+++++++++   list  filled   +++++++++\n" RST); // Retirar
+		printf(RED "\n+++++++++   List  filled   +++++++++\n" RST); // Retirar
 		if (DEBUGHARD == 1)
 			print_map_position(data); // Retirar
 	}
 	if (parse_textures(&data->texinfo) != 0)
 		return (ERROR);
 	if (DEBUG == 1)
-		printf(RED "\n+++++++++    Textures parsed    +++++++++\n" RST); // Retirar
+		printf(RED "\n++++++    Textures  parsed    ++++++\n" RST); // Retirar
 	return (SUCCESS);
 }

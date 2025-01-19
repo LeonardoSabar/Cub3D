@@ -14,7 +14,7 @@
 # include <errno.h>
 
 # define DEBUG 1
-# define DEBUGHARD 0
+# define DEBUGHARD 1
 
 # define SUCCESS 0
 # define ERROR 1
@@ -85,8 +85,8 @@ typedef struct s_cam
 {
 	int		plr_x;
 	int		plr_y;
-	int		rotation;
 	int		l_r;
+	int		rotation;
 	double	angle;
 	float	fov_plr;
 }	t_cam;
@@ -97,42 +97,42 @@ typedef struct s_texinfo
 	char			*south;
 	char			*west;
 	char			*east;
-	int				*floor; // implementar 4 posição para transparência, fixar 255
-	int				*ceiling; // implementar 4 posição para transparência, fizar 255
-	unsigned long	hex_floor;
-	unsigned long	hex_ceiling;
+	int				*floor;
+	int				*ceiling;
 	int				size;
 	int				index;
-	double			step;
-	double			pos;
 	int				x;
 	int				y;
+	double			step;
+	double			pos;
+	unsigned long	hex_floor;
+	unsigned long	hex_ceiling;
 }	t_texinfo;
 
 typedef struct s_mapinfo
 {
-	int			fd;
+	int			index_end_of_map;
 	int			line_count;
-	char		*path;
-	char		**file;
 	int			height;
 	int			width;
-	int			index_end_of_map;
+	int			fd;
+	char		*path;
+	char		**file;
 }	t_mapinfo;
 
 typedef struct s_player
 {
 	char	dir;
+	int		has_moved;
+	int		move_x;
+	int		move_y;
+	int		rotate;
 	double	pos_x;
 	double	pos_y;
 	double	dir_x;
 	double	dir_y;
 	double	plane_x;
 	double	plane_y;
-	int		has_moved;
-	int		move_x;
-	int		move_y;
-	int		rotate;
 }	t_player;
 
 typedef struct s_game

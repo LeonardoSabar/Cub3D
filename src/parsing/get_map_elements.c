@@ -6,20 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 20:56:52 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:35:41 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-static int print_floor_ceiling(t_texinfo *textures)
-{
-	if (textures->ceiling)
-		printf( O "\nCeiling: %d, %d, %d, %d(Transparence)\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
-	if (textures->floor)
-		printf("Floor: %d, %d, %d, %d(Transparence)\n" RST, textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
-	return (0);
-}
 
 static int print_texture(t_texinfo *textures) // Função para Debug // Retirar
 {
@@ -51,8 +42,6 @@ static int print_map(t_game *data) // Função para Debug // Retirar
     }
     return (0);
 }
-
-
 
 static char *parse_texture_path(char *line, int j)
 {
@@ -131,7 +120,6 @@ static int parse_map_info(t_game *data, char **map, int i, int j)
                 return (err_msg(Y "Invalid texture(s)" RST, ERROR));
             return (3);
         }
-    
     }
     else if (ft_isdigit(map[i][j]))
     {
@@ -166,8 +154,6 @@ int	get_map_elements(t_game *data, char **map)
 			{
                 if (DEBUGHARD == 1) // retirar
 				    print_texture(&data->texinfo); // retirar
-                if (DEBUGHARD == 1) // retirar
-				    print_floor_ceiling(&data->texinfo); // retirar
 				return (SUCCESS);
 			}
 			j++;

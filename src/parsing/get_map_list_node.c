@@ -6,13 +6,14 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:41:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 13:30:59 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:40:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static t_map *create_new_map_node(int line, int column, char content) {
+static t_map *create_new_map_node(int line, int column, char content)
+{
     t_map *new_node = malloc(sizeof(t_map));
     if (!new_node) {
         return NULL;
@@ -27,7 +28,8 @@ static t_map *create_new_map_node(int line, int column, char content) {
     return new_node;
 }
 
-static void link_nodes(t_map *current, t_map *previous, t_map *up) {
+static void link_nodes(t_map *current, t_map *previous, t_map *up)
+{
     if (previous != NULL) {
         previous->nxt = current;
         current->prv = previous;
@@ -38,8 +40,8 @@ static void link_nodes(t_map *current, t_map *previous, t_map *up) {
     }
 }
 
-
-static t_map *fill_map_list(char **map_tab, int height, int width) {
+static t_map *fill_map_list(char **map_tab, int height, int width)
+{
     t_map *head = NULL; 
     t_map *current = NULL; 
     t_map *previous = NULL; 

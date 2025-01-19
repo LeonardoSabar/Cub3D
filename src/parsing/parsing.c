@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 17:14:38 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:37:23 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int	parsing(t_game *data, char **argv)
 		return (ERROR);
 	if (DEBUG == 1)
 		printf(RED "\n++++++    Textures  parsed    ++++++\n" RST); // Retirar
+	printf(G "\n++++ Parsing completed successfully! ++++\n\n" RST); // Retirar
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 17:35:23 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 20:55:18 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static bool	parse_xpm_extension(char *file)
 	len = ft_strlen(file);
 	if (len < 4)
 		return (false);
-	return (!ft_strncmp(file + len - 4, ".xpm", 4));
+	return (!special_ft_strncmp(file + len - 4, ".xpm", 4)); // resolver isso, tive que colocar por conta do '\r'
 }
 
 static bool	is_dir(char *arg)
@@ -60,9 +60,9 @@ int	parse_file(char *arg, bool cub)
 		if (fd == -1)
 			return (err_msg(Y "Error opening file" RST, 1));
 		close(fd);
+		if (!parse_cub_extension(arg))
+			return (err_msg(Y "Not a .cub file" RST, 1));
 	}
-	if (cub && !parse_cub_extension(arg))
-		return (err_msg(Y "Not a .cub file" RST, 1));
 	if (!cub && !parse_xpm_extension(arg))
 		return (err_msg(Y "Not a .xpm file" RST, 1)); // mudar para png.
 	return (0);

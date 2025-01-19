@@ -179,56 +179,6 @@ int     parse_map(t_game *data, char **map);
 int     parse_textures(t_texinfo *textures);
 int     parsing(t_game *data, char **argv);
 int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
-
+int		special_ft_strncmp(const char *str1, const char *str2, size_t n);
 
 #endif
-
-
-/*
-
-typedef struct s_textures {
-    char *north;
-    char *south;
-    char *west;
-    char *east;
-}				t_textures;
-
-typedef struct s_player
-{
-    char    direction;
-    double  pos_x;
-    double  pos_y;
-    double  dir_x;
-    double  dir_y;
-    double  plane_x;
-    double  plane_y;
-    float   move_x;
-    float   move_y;
-    float   angle;
-}				t_player;
-
-typedef struct s_mapinfo
-{
-	int			fd;
-	int			line_count;
-	char		*path;
-	char		**file;
-	int			height;
-	int			width;
-	int			index_end_of_map;
-}	t_mapinfo;
-
-typedef struct s_game
-{
-    void        *mlx;
-    void        *windows;
-    int         width;
-    int         height;
-    t_mapinfo   mapinfo;
-    t_player    player;
-    char        **map;
-	t_textures	textures;
-}				t_game;
-
-
-*/

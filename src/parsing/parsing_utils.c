@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:32:37 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 20:15:10 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 21:17:58 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,34 +43,29 @@ int	required_rgb_colors(int *color_array)
 	return (SUCCESS);
 }
 
+
 int special_ft_strncmp(const char *str1, const char *str2, size_t n)
 {
     while (n > 0)
     {
-        if (*str1 == '\r') // Ignora o caractere '\r' na primeira string
+        if (*str1 == '\r')
         {
             str1++;
-            continue; // Avança para a próxima iteração do loop
+            continue;
         }
         
-        if (*str2 == '\r') // Ignora o caractere '\r' na segunda string
+        if (*str2 == '\r')
         {
             str2++;
-            continue; // Avança para a próxima iteração do loop
+            continue;
         }
-
-        // Se os caracteres são diferentes, termina a comparação
         if (*str1 != *str2)
             break;
-
         str1++;
         str2++;
         n--;
     }
-
-    // Verifica se n é zero ou se ambos os ponteiros chegam ao mesmo tempo
     if (n == 0)
         return (0);
-
-    return ((unsigned char)*str1 - (unsigned char)*str2); // Retorna a diferença entre caracteres
+    return ((unsigned char)*str1 - (unsigned char)*str2);
 }

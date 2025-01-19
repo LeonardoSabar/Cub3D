@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 04:25:10 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:32:59 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,12 @@ int	set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j)
 	if (line[j] == 'C')
 	{
 		textures->ceiling = parse_rgb_color(line + j + 1);
-        textures->ceiling[3] = 255;
-		if (textures->ceiling == 0)
+		if (textures->ceiling == 0) 
 			return (err_msg(Y "Invalid ceiling RGB color" RST, 2));
 	}
 	else if (line[j] == 'F')
 	{
 		textures->floor = parse_rgb_color(line + j + 1);
-        textures->floor[3] = 255;
 		if (textures->floor == 0)
 			return (err_msg(Y "Invalid floor RGB color" RST, 2));
 	}

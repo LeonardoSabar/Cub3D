@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 04:27:05 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:07:52 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,7 @@ int	get_map_elements(t_game *data, char **map)
 		}
 		i++;
 	}
-	return (SUCCESS);
+    return (SUCCESS);
 }
 
 /*

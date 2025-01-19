@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 02:38:44 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:35:23 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	parse_file(char *arg, bool cub)
 	}
 	if (cub && !parse_cub_extension(arg))
 		return (err_msg(Y "Not a .cub file" RST, 1));
-	if (!cub && parse_xpm_extension(arg))
-		return (err_msg(Y "Not a .xpm file" RST, 1));
+	if (!cub && !parse_xpm_extension(arg))
+		return (err_msg(Y "Not a .xpm file" RST, 1)); // mudar para png.
 	return (0);
 }

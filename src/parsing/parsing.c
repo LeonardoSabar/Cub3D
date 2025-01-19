@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 04:24:18 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:14:38 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static int print_map_position(t_game *data) // Função para Debug // Retirar
         printf(O "Linha: %d, Coluna: %d, Conteúdo: %c up: %p down: %p\n" RST, current->line, current->column, current->content, current->up, current->down);
         current = current->nxt;
     }
-
     return 0;
 }
 

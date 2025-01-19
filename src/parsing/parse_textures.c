@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 21:45:24 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 13:32:38 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:13:27 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,15 @@ static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 	int				r;
 	int				g;
 	int				b;
+	int				t;
 
+	rgb_tab[3] = 255;
 	r = rgb_tab[0];
 	g = rgb_tab[1];
 	b = rgb_tab[2];
-	result = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff);
+	t = rgb_tab[3];
+	
+	result = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff) + ((t & 0xff) << 24);
 	return (result);
 }
 

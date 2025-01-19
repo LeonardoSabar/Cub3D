@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:32:37 by leobarbo          #+#    #+#             */
-/*   Updated: 2024/12/21 23:32:37 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/19 17:02:30 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,12 @@ size_t	find_biggest_len(t_mapinfo *map, int i)
 		i++;
 	}
 	return (biggest_len);
+}
+
+int	required_rgb_colors(int *color_array)
+{
+	color_array[3] = 255;
+	if (color_array[0] == -1 || color_array[1] == -1 || color_array[2] == -1 || color_array[3] == -1)
+		return (ERROR);
+	return (SUCCESS);
 }

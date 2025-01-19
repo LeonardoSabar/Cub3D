@@ -172,6 +172,7 @@ int     get_map_list_node(t_game *data, char **map_tab);
 char   *get_next_line(int fd);
 void    init_data(t_game *data);
 int     is_a_white_space(char c);
+int		required_rgb_colors(int *color_array);
 int     parse_data(char *path, t_game *data);
 int     parse_file(char *file, bool cub);
 int     parse_map(t_game *data, char **map);

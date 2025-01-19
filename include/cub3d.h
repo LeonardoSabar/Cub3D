@@ -160,24 +160,25 @@ typedef struct s_game
 //                                 Functions                                  //
 //****************************************************************************//
 
+int     check_map_sides(t_mapinfo *map, char **map_tab);
 void    clean_exit(t_game *data, int code);
-void    free_tab(void **tab);
-void    init_data(t_game *data);
-int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
-int     parse_file(char *file, bool cub);
-int     parse_data(char *path, t_game *data);
-size_t  find_biggest_len(t_mapinfo *map, int i);
-int     is_a_white_space(char c);
+int     create_map(t_game *data, char **file, int i);
 int     err_msg(char *message, int code);
+size_t  find_biggest_len(t_mapinfo *map, int i);
+void    free_resources(t_game *data);
+void    free_tab(void **tab);
 int     get_map_elements(t_game *data, char **file);
-void	free_resources(t_game *data);
-int		parse_map(t_game *data, char **map);
+int     get_map_list_node(t_game *data, char **map_tab);
 char   *get_next_line(int fd);
-int		check_map_sides(t_mapinfo *map, char **map_tab);
-int		create_map(t_game *data, char **file, int i);
+void    init_data(t_game *data);
+int     is_a_white_space(char c);
+int     parse_data(char *path, t_game *data);
+int     parse_file(char *file, bool cub);
+int     parse_map(t_game *data, char **map);
+int     parse_textures(t_texinfo *textures);
 int     parsing(t_game *data, char **argv);
-int		parse_textures(t_texinfo *textures);
-int		get_map_list_node(t_game *data, char **map_tab);
+int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
+
 
 #endif
 

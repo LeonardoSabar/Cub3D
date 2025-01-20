@@ -13,7 +13,7 @@
 # include <math.h>
 # include <errno.h>
 
-# define DEBUG 1
+# define DEBUG 0
 # define DEBUGHARD 0
 
 # define SUCCESS 0

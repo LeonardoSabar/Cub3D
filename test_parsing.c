@@ -3,11 +3,14 @@
 #include <dirent.h> // Para manipulação de diretórios
 #include <string.h> // Para funções de string
 #include <stdbool.h>
+#include <errno.h>
+#include <sys/stat.h> // Necessário para a função stat
+#include "./include/colors.h"
 
-# define M      "\033[1;35m"   /* Bold Magenta */
-# define RST    "\033[0m"      /* Reset to default color */
+// Compilar usando o comando: gcc -o test_maps test_maps.c
 
-#define MAPS_DIRECTORY "maps/Good/" // Altere isso para o diretório onde estão seus mapas
+#define MAPS_DIRECTORY1 "maps/Good/" // Primeiro diretório onde estão seus mapas
+#define MAPS_DIRECTORY2 "maps/Bad/" // Segundo diretório onde estão seus mapas
 #define CUB_EXECUTABLE "./cub3d" // O nome do seu executável
 
 // Função para verificar se um arquivo tem a extensão correta
@@ -22,40 +25,59 @@ void test_map_parsing(const char *map_path)
 {
     char command[512];
     snprintf(command, sizeof(command), "%s %s", CUB_EXECUTABLE, map_path);
-    printf(M"Executando comando: %s\n"RST, command);
     int exit_code = system(command);
     if (exit_code != 0)
-        printf("Erro ao processar o mapa: %s\n", map_path);
+    {
+        printf(RED"\n[  x  ] Erro ao processar o mapa: %s\n\n"RST, map_path);
+    }
     else
-        printf("Mapa processado com sucesso: %s\n", map_path);
+        printf(G"\n[PASS] Mapa processado com sucesso: %s \n\n"RST, map_path);
 }
 
-
-int main()
+void process_maps_in_directory(const char *directory)
 {
     DIR *dir;
     struct dirent *ent;
 
-    if ((dir = opendir(MAPS_DIRECTORY)) != NULL)
+    if ((dir = opendir(directory)) != NULL)
     {
-        printf("Testando mapas em %s:\n", MAPS_DIRECTORY);
+        printf(B"\nTestando mapas em %s:\n\n"RST, directory);
         while ((ent = readdir(dir)) != NULL)
         {
-            if (has_extension(ent->d_name, ".cub"))
+            // Ignorar pastas ocultas (iniciadas com .)
+            if (ent->d_name[0] == '.')
+                continue; // Pular entrada que começa com '.'
+
+            // Verificação se é um diretório usando stat
+            struct stat path_stat;
+            char path[512];
+            snprintf(path, sizeof(path), "%s%s", directory, ent->d_name);
+            if (stat(path, &path_stat) != 0)
             {
-                char map_path[256];
-                snprintf(map_path, sizeof(map_path), "%s%s", MAPS_DIRECTORY, ent->d_name);
-                test_map_parsing(map_path);
+                perror("Erro ao chamar stat");
+                continue; // Se houver erro, passa para a próxima entrada
+            }
+
+            // Se não é um diretório, testamos a extensão
+            if (!S_ISDIR(path_stat.st_mode) && has_extension(ent->d_name, ".cub"))
+            {
+                test_map_parsing(path);
             }
         }
         closedir(dir);
     }
     else
     {
-        printf("mparse: %s\n", MAPS_DIRECTORY);
+        printf("mparse: %s\n", directory);
         perror("Não foi possível abrir o diretório");
-        return EXIT_FAILURE;
     }
+}
+
+int main()
+{
+    // Processa mapas nos dois diretórios
+    process_maps_in_directory(MAPS_DIRECTORY1);
+    process_maps_in_directory(MAPS_DIRECTORY2);
 
     return EXIT_SUCCESS;
 }

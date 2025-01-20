@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:37:50 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 21:21:14 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void init_cam(t_cam *cam)
 
 void init_texinfo(t_texinfo *texinfo)
 {
+    texinfo->hexadecimal_ceiling = NULL;
+    texinfo->hexadecimal_floor = NULL;
     texinfo->north = NULL;
     texinfo->south = NULL;
     texinfo->west = NULL;

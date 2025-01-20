@@ -46,6 +46,8 @@ static void print_map(t_map *map) {
 
 static  void print_texinfo(t_texinfo texinfo) {
     printf(B"\nTexture Info:\n"RST);
+    printf("  hexadecimal floor: %s\n", texinfo.hexadecimal_floor);
+    printf("  hexadecimal ceiling: %s\n", texinfo.hexadecimal_ceiling);
     printf("  north: %s\n", texinfo.north);
     printf("  south: %s\n", texinfo.south);
     printf("  west: %s\n", texinfo.west);

@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 21:45:24 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/20 03:32:47 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 21:43:14 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,31 @@ static int	check_valid_rgb(int *rgb)
 		i++;
 	}
 	return (SUCCESS);
+}
+
+char* convert_hex_to_string(unsigned long hex_value)
+{
+    int digit;
+    int index;
+    char *hex_string; 
+	
+	hex_string = (char*)malloc(10 * sizeof(char));
+    if (hex_string == NULL)
+        return NULL;
+    hex_string[0] = '#';
+	index = 7;
+    while (index >= 0)
+	{
+        digit = hex_value & 0xF;
+        if (digit < 10)
+            hex_string[index + 1] = '0' + digit;
+        else
+			hex_string[index + 1] = 'A' + (digit - 10);
+        hex_value >>= 4;
+        index--;
+    }
+    hex_string[9] = '\0';
+    return hex_string;
 }
 
 static unsigned long	convert_rgb_to_hex(int *rgb_tab)
@@ -60,5 +85,7 @@ int	parse_textures(t_texinfo *textures)
 		return (FAILURE);
 	textures->hex_floor = convert_rgb_to_hex(textures->floor);
 	textures->hex_ceiling = convert_rgb_to_hex(textures->ceiling);
+	textures->hexadecimal_floor = convert_hex_to_string(textures->hex_floor);
+	textures->hexadecimal_ceiling = convert_hex_to_string(textures->hex_ceiling);
 	return (SUCCESS);
 }

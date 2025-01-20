@@ -14,7 +14,7 @@
 # include <errno.h>
 
 # define DEBUG 0
-# define DEBUGHARD 0
+# define DEBUGHARD 1
 
 # define SUCCESS 0
 # define ERROR 1
@@ -93,6 +93,8 @@ typedef struct s_cam
 
 typedef struct s_texinfo
 {
+	char			*hexadecimal_floor;
+	char			*hexadecimal_ceiling;
 	char			*north;
 	char			*south;
 	char			*west;

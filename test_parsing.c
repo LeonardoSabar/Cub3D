@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <dirent.h> // Para manipulação de diretórios
-#include <string.h> // Para funções de string
+#include <dirent.h> 
+#include <string.h> 
 #include <stdbool.h>
 #include <errno.h>
-#include <sys/stat.h> // Necessário para a função stat
+#include <sys/stat.h> 
 #include "./include/colors.h"
 
 // Compilar usando o comando: gcc -o test_maps test_maps.c
 
-#define MAPS_DIRECTORY1 "maps/Good/" // Primeiro diretório onde estão seus mapas
-#define MAPS_DIRECTORY2 "maps/Bad/" // Segundo diretório onde estão seus mapas
-#define CUB_EXECUTABLE "./cub3d" // O nome do seu executável
+#define MAPS_DIRECTORY1 "maps/Good/" 
+#define MAPS_DIRECTORY2 "maps/Bad/" 
+#define CUB_EXECUTABLE "./cub3d" 
 
-// Função para verificar se um arquivo tem a extensão correta
+
 bool has_extension(const char *filename, const char *extension)
 {
     size_t len = strlen(filename);
@@ -44,21 +44,16 @@ void process_maps_in_directory(const char *directory)
         printf(B"\nTestando mapas em %s:\n\n"RST, directory);
         while ((ent = readdir(dir)) != NULL)
         {
-            // Ignorar pastas ocultas (iniciadas com .)
             if (ent->d_name[0] == '.')
-                continue; // Pular entrada que começa com '.'
-
-            // Verificação se é um diretório usando stat
+                continue;
             struct stat path_stat;
             char path[512];
             snprintf(path, sizeof(path), "%s%s", directory, ent->d_name);
             if (stat(path, &path_stat) != 0)
             {
                 perror("Erro ao chamar stat");
-                continue; // Se houver erro, passa para a próxima entrada
+                continue;
             }
-
-            // Se não é um diretório, testamos a extensão
             if (!S_ISDIR(path_stat.st_mode) && has_extension(ent->d_name, ".cub"))
             {
                 test_map_parsing(path);
@@ -75,7 +70,6 @@ void process_maps_in_directory(const char *directory)
 
 int main()
 {
-    // Processa mapas nos dois diretórios
     process_maps_in_directory(MAPS_DIRECTORY1);
     process_maps_in_directory(MAPS_DIRECTORY2);
 

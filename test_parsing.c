@@ -57,7 +57,7 @@ void run_train(void)
             else
                 printf("\n"); 
 
-            row++; // Avança para a próxima linha
+            row++;
         }
         printf(Y"\nAguarde, estamos rodando os testes...\n"RST);
         frame++;

@@ -11,41 +11,47 @@
 #define CUB_EXECUTABLE "./cub3d" // O nome do seu executável
 
 // Função para verificar se um arquivo tem a extensão correta
-bool has_extension(const char *filename, const char *extension) {
+bool has_extension(const char *filename, const char *extension)
+{
     size_t len = strlen(filename);
     size_t ext_len = strlen(extension);
     return len > ext_len && strcmp(filename + len - ext_len, extension) == 0;
 }
 
-// Função para testar o parsing de um mapa
-void test_map_parsing(const char *map_path) {
-    char command[512]; // Certifique-se de que este tamanho é suficiente
+void test_map_parsing(const char *map_path)
+{
+    char command[512];
     snprintf(command, sizeof(command), "%s %s", CUB_EXECUTABLE, map_path);
     printf(M"Executando comando: %s\n"RST, command);
-    int exit_code = system(command); // Chama o executável com os dois argumentos
-    if (exit_code != 0) {
+    int exit_code = system(command);
+    if (exit_code != 0)
         printf("Erro ao processar o mapa: %s\n", map_path);
-    } else {
+    else
         printf("Mapa processado com sucesso: %s\n", map_path);
-    }
 }
 
-// Função principal para percorrer a pasta de mapas
-int main() {
+
+int main()
+{
     DIR *dir;
     struct dirent *ent;
 
-    if ((dir = opendir(MAPS_DIRECTORY)) != NULL) {
+    if ((dir = opendir(MAPS_DIRECTORY)) != NULL)
+    {
         printf("Testando mapas em %s:\n", MAPS_DIRECTORY);
-        while ((ent = readdir(dir)) != NULL) {
-            if (has_extension(ent->d_name, ".cub")) {
+        while ((ent = readdir(dir)) != NULL)
+        {
+            if (has_extension(ent->d_name, ".cub"))
+            {
                 char map_path[256];
                 snprintf(map_path, sizeof(map_path), "%s%s", MAPS_DIRECTORY, ent->d_name);
                 test_map_parsing(map_path);
             }
         }
         closedir(dir);
-    } else {
+    }
+    else
+    {
         printf("mparse: %s\n", MAPS_DIRECTORY);
         perror("Não foi possível abrir o diretório");
         return EXIT_FAILURE;

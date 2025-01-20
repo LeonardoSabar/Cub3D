@@ -6,12 +6,68 @@
 #include <errno.h>
 #include <sys/stat.h> 
 #include "./include/colors.h"
-
-// Compilar usando o comando: gcc -o test_maps test_maps.c
+#include <unistd.h>
 
 #define MAPS_DIRECTORY1 "maps/Good/" 
 #define MAPS_DIRECTORY2 "maps/Bad/" 
 #define CUB_EXECUTABLE "./cub3d" 
+
+
+#define TERMINAL_WIDTH 100 // Largura do terminal
+#define DELAY 30000        // Tempo de delay por frame (30ms)
+
+// Variável de controle para o trem
+int show_train = 1; // 1 = Funciona o trem, 0 = Após o trem, o resto do programa segue
+
+void run_train(void)
+{
+    // Definição das linhas do "trem" com a nova mensagem
+    char *train[] = {
+        "            ___          _       ____     _          _____                 _     ",
+        "    o O O / __|  _  _  | |__   |__ /  __| |   ___  |_   _|  ___    ___   | |_   ",
+        "   o     | (__  | +| | | '_ \\   |_ \\ / _` |  |___|   | |   / -_)  (_-<   |  _|  ",
+        "  TS__[O] \\___|  \\_,_| |_.__/  |___/ \\__,_|  _____  _|_|_  \\___|  /__/_  _\\__|  ",
+        " {======_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|     _|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"_|\"\"\"\"\"| ",
+        "./o--000\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-' "
+    };
+
+    int train_height = sizeof(train) / sizeof(char *); 
+    int train_length = strlen(train[0]); 
+    int frame = 0;
+
+    int max_frame = TERMINAL_WIDTH + train_length;
+
+    while (frame <= max_frame)
+    {
+        printf("\033[H\033[J");
+
+        int row = 0;
+        while (row < train_height)
+        {
+            int spaces = TERMINAL_WIDTH - frame; 
+
+            int space_count = 0;
+            while (space_count < spaces)
+            {
+                printf(" ");
+                space_count++;
+            }
+            if (spaces + train_length > 0)
+                printf(C"%s\n"RST, train[row]);
+            else
+                printf("\n"); 
+
+            row++; // Avança para a próxima linha
+        }
+        printf(Y"\nAguarde, estamos rodando os testes...\n"RST);
+        frame++;
+        usleep(DELAY);
+    }
+    printf("\033[H\033[J");
+
+    show_train = 0;
+}
+
 
 bool has_extension(const char *filename, const char *extension)
 {
@@ -54,6 +110,9 @@ void process_maps_in_directory(const char *directory)
 {
     DIR *dir;
     struct dirent *ent;
+
+    while(show_train)
+        run_train();
 
     if ((dir = opendir(directory)) != NULL)
     {

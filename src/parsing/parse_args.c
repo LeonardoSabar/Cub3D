@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 21:16:42 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:31:58 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,6 @@ int	parse_file(char *arg, bool cub)
 {
 	int	fd;
 
-	
-	if (DEBUGHARD == 1) // Retirar
-		printf(RED "Parsing arg file: " RST "%s\n", arg); // Retirar
 	if (is_dir(arg))
 		return (err_msg(Y "The argument is a directory!" RST, 1));
 	if (cub)

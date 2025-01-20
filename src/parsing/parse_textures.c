@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/15 21:45:24 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 21:36:56 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:32:47 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,6 @@ static unsigned long	convert_rgb_to_hex(int *rgb_tab)
 	result = ((r & 0xff) << 16) + ((g & 0xff) << 8) + (b & 0xff) + ((t & 0xff) << 24);
 	return (result);
 }
-static int print_floor_ceiling(t_texinfo *textures)
-{
-	if (textures->ceiling)
-		printf(Y"\nCeiling: %d, %d, %d, %d(Transparence) parsed!\n", textures->ceiling[0], textures->ceiling[1], textures->ceiling[2], textures->ceiling[3]);
-	if (textures->floor)
-		printf("Floor: %d, %d, %d, %d(Transparence) parsed!\n\n"RST, textures->floor[0], textures->floor[1], textures->floor[2], textures->floor[3]);
-	return (0);
-}
 
 int	parse_textures(t_texinfo *textures)
 {
@@ -68,7 +60,5 @@ int	parse_textures(t_texinfo *textures)
 		return (FAILURE);
 	textures->hex_floor = convert_rgb_to_hex(textures->floor);
 	textures->hex_ceiling = convert_rgb_to_hex(textures->ceiling);
-	if (DEBUGHARD == 1) // retirar
-		print_floor_ceiling(textures);
 	return (SUCCESS);
 }

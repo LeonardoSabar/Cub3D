@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 22:48:30 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:36:25 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:10:56 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,6 @@ static int fill_map_tab(t_mapinfo *mapinfo, char **map_tab, int index)
     map_tab[i] = NULL;
     return (SUCCESS);
 }
-
 
 static int get_map_info(t_game *data, char **file, int i)
 {

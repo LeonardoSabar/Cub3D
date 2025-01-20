@@ -6,42 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 21:35:41 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:27:28 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-static int print_texture(t_texinfo *textures) // Função para Debug // Retirar
-{
-	printf(O"\nNorth: %s\n" RST, textures->north);
-	printf(O"South: %s\n" RST, textures->south);
-	printf(O"West: %s\n" RST, textures->west);
-	printf(O"East: %s\n" RST, textures->east);
-	return (0);
-}
-
-
-static int print_map(t_game *data) // Função para Debug // Retirar
-{
-    int i;
-    int j;
-
-    i = 0;
-    printf("\nMap:\n");
-    while (data->map[i])
-    {
-        j = 0;
-        while (data->map[i][j])
-        {
-            printf(BGCYN "%c" RST, data->map[i][j]);
-            j++;
-        }
-        printf("\n");
-        i++;
-    }
-    return (0);
-}
 
 static char *parse_texture_path(char *line, int j)
 {
@@ -125,8 +94,6 @@ static int parse_map_info(t_game *data, char **map, int i, int j)
     {
         if (create_map(data, map, i) == ERROR)
             return (err_msg(Y "Map description is either wrong or incomplete" RST, ERROR));
-        if (DEBUGHARD == 1) // retirar
-            print_map(data); // retirar
         return (SUCCESS);
     }
     return (4);
@@ -151,11 +118,7 @@ int	get_map_elements(t_game *data, char **map)
 			else if (ret == ERROR)
 				return (ERROR);
 			else if (ret == SUCCESS)
-			{
-                if (DEBUGHARD == 1) // retirar
-				    print_texture(&data->texinfo); // retirar
 				return (SUCCESS);
-			}
 			j++;
 		}
 		i++;

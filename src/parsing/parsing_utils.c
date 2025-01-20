@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:32:37 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 21:17:58 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 03:32:58 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,7 @@ int special_ft_strncmp(const char *str1, const char *str2, size_t n)
         {
             str1++;
             continue;
-        }
-        
+        }       
         if (*str2 == '\r')
         {
             str2++;

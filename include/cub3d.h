@@ -14,7 +14,7 @@
 # include <errno.h>
 
 # define DEBUG 1
-# define DEBUGHARD 1
+# define DEBUGHARD 0
 
 # define SUCCESS 0
 # define ERROR 1
@@ -138,7 +138,7 @@ typedef struct s_player
 typedef struct s_game
 {
 	int			is_horizon;
-	char		**parse_map;
+	char		**parse_map; // Confirmar se esta sendo utilizada
 	char		**map;
 	t_player	player;
 	t_texinfo	texinfo;
@@ -180,5 +180,7 @@ int     parse_textures(t_texinfo *textures);
 int     parsing(t_game *data, char **argv);
 int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
 int		special_ft_strncmp(const char *str1, const char *str2, size_t n);
+
+void print_game_info(t_game game);
 
 #endif

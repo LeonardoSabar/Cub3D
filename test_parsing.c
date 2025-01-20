@@ -111,9 +111,6 @@ void process_maps_in_directory(const char *directory)
     DIR *dir;
     struct dirent *ent;
 
-    while(show_train)
-        run_train();
-
     if ((dir = opendir(directory)) != NULL)
     {
         printf(B"\n\n *********** Testando mapas em %s: ***********\n"RST, directory);
@@ -145,6 +142,8 @@ void process_maps_in_directory(const char *directory)
 
 int main()
 {
+    while(show_train)
+        run_train();
     process_maps_in_directory(MAPS_DIRECTORY1);
     process_maps_in_directory(MAPS_DIRECTORY2);
 

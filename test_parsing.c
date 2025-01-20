@@ -13,7 +13,6 @@
 #define MAPS_DIRECTORY2 "maps/Bad/" 
 #define CUB_EXECUTABLE "./cub3d" 
 
-
 bool has_extension(const char *filename, const char *extension)
 {
     size_t len = strlen(filename);
@@ -21,17 +20,34 @@ bool has_extension(const char *filename, const char *extension)
     return len > ext_len && strcmp(filename + len - ext_len, extension) == 0;
 }
 
-void test_map_parsing(const char *map_path)
+void test_map_parsing(const char *map_path, const char *directory)
 {
     char command[512];
-    snprintf(command, sizeof(command), "%s %s", CUB_EXECUTABLE, map_path);
+    snprintf(command, sizeof(command), "%s %s > /dev/null 2>&1", CUB_EXECUTABLE, map_path);
     int exit_code = system(command);
-    if (exit_code != 0)
+
+    if (strcmp(directory, MAPS_DIRECTORY1) == 0)
     {
-        printf(RED"\n[  x  ] Erro ao processar o mapa: %s\n\n"RST, map_path);
+        if (exit_code == 0)
+        {
+            printf(G"\n[ PASS ] Mapa processado com sucesso: %s \n"RST, map_path);
+        }
+        else
+        {
+            printf(RED"\n[ NOT PASS ] Erro ao processar o mapa: %s\n"RST, map_path);
+        }
     }
-    else
-        printf(G"\n[PASS] Mapa processado com sucesso: %s \n\n"RST, map_path);
+    else if (strcmp(directory, MAPS_DIRECTORY2) == 0)
+    {
+        if (exit_code != 0)
+        {
+            printf(G"\n[ PASS ] Erro esperado para o mapa: %s \n"RST, map_path);
+        }
+        else
+        {
+            printf(RED"\n[ NOT PASS ] Mapa processado com sucesso, mas deveria ter falhado: %s\n"RST, map_path);
+        }
+    }
 }
 
 void process_maps_in_directory(const char *directory)
@@ -41,7 +57,7 @@ void process_maps_in_directory(const char *directory)
 
     if ((dir = opendir(directory)) != NULL)
     {
-        printf(B"\nTestando mapas em %s:\n\n"RST, directory);
+        printf(B"\n\n *********** Testando mapas em %s: ***********\n"RST, directory);
         while ((ent = readdir(dir)) != NULL)
         {
             if (ent->d_name[0] == '.')
@@ -56,7 +72,7 @@ void process_maps_in_directory(const char *directory)
             }
             if (!S_ISDIR(path_stat.st_mode) && has_extension(ent->d_name, ".cub"))
             {
-                test_map_parsing(path);
+                test_map_parsing(path, directory);
             }
         }
         closedir(dir);

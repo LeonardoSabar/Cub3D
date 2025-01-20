@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/20 03:27:28 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/20 13:40:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ static int assign_direction_textures(t_texinfo *textures, char *line, int j)
         textures->east = parse_texture_path(line, j + 2);
     else
 	{
-		if (textures->north && textures->south && textures->west && textures->east)
-            return (0);
+		//if (textures->north && textures->south && textures->west && textures->east)
+            //return (0);
         return (2);
 	}
 	return (0);

@@ -1,27 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <dirent.h> 
-#include <string.h> 
+#include <dirent.h>
+#include <string.h>
 #include <stdbool.h>
 #include <errno.h>
-#include <sys/stat.h> 
-#include "./test_parsing_colors.h"
+#include <sys/stat.h>
 #include <unistd.h>
+#include "test_parsing_colors.h"
 
-#define MAPS_DIRECTORY1 "./maps/Good/" 
-#define MAPS_DIRECTORY2 "./maps/Bad/" 
-#define CUB_EXECUTABLE ".././cub3d" 
-
+#define MAPS_DIRECTORY1 "./maps/Good/"
+#define MAPS_DIRECTORY2 "./maps/Bad/"
+#define CUB_EXECUTABLE ".././cub3d"
 
 #define TERMINAL_WIDTH 100 // Largura do terminal
-#define DELAY 30000        // Tempo de delay por frame (30ms)
+#define DELAY 30000        // Tempo de delay do trem (30ms)
+#define TEST_DELAY 300000  // Delay entre testes (0.3s)
 
-// Variável de controle para o trem
-int show_train = 1; // 1 = Funciona o trem, 0 = Após o trem, o resto do programa segue
+// Contadores globais de resultados
+int pass_count = 0; 
+int not_pass_count = 0;
+
+// Controle para o trem
+int show_train = 1;
 
 void run_train(void)
 {
-    // Definição das linhas do "trem" com a nova mensagem
     char *train[] = {
         "            ___          _       ____     _          _____                 _     ",
         "    o O O / __|  _  _  | |__   |__ /  __| |   ___  |_   _|  ___    ___   | |_   ",
@@ -31,10 +34,9 @@ void run_train(void)
         "./o--000\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-\"`-0-0-' "
     };
 
-    int train_height = sizeof(train) / sizeof(char *); 
-    int train_length = strlen(train[0]); 
+    int train_height = sizeof(train) / sizeof(char *);
+    int train_length = strlen(train[0]);
     int frame = 0;
-
     int max_frame = TERMINAL_WIDTH + train_length;
 
     while (frame <= max_frame)
@@ -44,30 +46,28 @@ void run_train(void)
         int row = 0;
         while (row < train_height)
         {
-            int spaces = TERMINAL_WIDTH - frame; 
-
+            int spaces = TERMINAL_WIDTH - frame;
             int space_count = 0;
+
             while (space_count < spaces)
             {
                 printf(" ");
                 space_count++;
             }
             if (spaces + train_length > 0)
-                printf(C"%s\n"RST, train[row]);
+                printf(C "%s\n" RST, train[row]);
             else
-                printf("\n"); 
+                printf("\n");
 
             row++;
         }
-        printf(Y"\nAguarde, estamos rodando os testes...\n"RST);
+        printf(Y"\n_________________________________________ Aguarde, estamos rodando os testes...\n" RST);
         frame++;
         usleep(DELAY);
     }
     printf("\033[H\033[J");
-
     show_train = 0;
 }
-
 
 bool has_extension(const char *filename, const char *extension)
 {
@@ -86,24 +86,29 @@ void test_map_parsing(const char *map_path, const char *directory)
     {
         if (exit_code == 0)
         {
-            printf(G"\n[ PASS ] Mapa processado com sucesso: %s \n"RST, map_path);
+            printf("\n\033[1;32m[ PASS ] Mapa processado com sucesso: %s \033[0m\n", map_path);
+            pass_count++;
         }
         else
         {
-            printf(RED"\n[ NOT PASS ] Erro ao processar o mapa: %s\n"RST, map_path);
+            printf("\n\033[1;31m[ NOT PASS ] Erro ao processar o mapa: %s\033[0m\n", map_path);
+            not_pass_count++;
         }
     }
     else if (strcmp(directory, MAPS_DIRECTORY2) == 0)
     {
         if (exit_code != 0)
         {
-            printf(G"\n[ PASS ] Erro esperado para o mapa: %s \n"RST, map_path);
+            printf("\n\033[1;32m[ PASS ] Erro esperado para o mapa: %s \033[0m\n", map_path);
+            pass_count++;
         }
         else
         {
-            printf(RED"\n[ NOT PASS ] Mapa processado com sucesso, mas deveria ter falhado: %s\n"RST, map_path);
+            printf("\n\033[1;31m[ NOT PASS ] Mapa processado com sucesso, mas deveria ter falhado: %s\033[0m\n", map_path);
+            not_pass_count++;
         }
     }
+    usleep(TEST_DELAY);
 }
 
 void process_maps_in_directory(const char *directory)
@@ -113,7 +118,7 @@ void process_maps_in_directory(const char *directory)
 
     if ((dir = opendir(directory)) != NULL)
     {
-        printf(B"\n\n *********** Testando mapas em %s: ***********\n"RST, directory);
+        printf(B "\n\n ************** Testando mapas em %s: **************\n" RST, directory);
         while ((ent = readdir(dir)) != NULL)
         {
             if (ent->d_name[0] == '.')
@@ -123,7 +128,7 @@ void process_maps_in_directory(const char *directory)
             snprintf(path, sizeof(path), "%s%s", directory, ent->d_name);
             if (stat(path, &path_stat) != 0)
             {
-                perror("Erro ao chamar stat");
+                perror(RED "Erro ao chamar stat" RST);
                 continue;
             }
             if (!S_ISDIR(path_stat.st_mode) && has_extension(ent->d_name, ".cub"))
@@ -135,17 +140,23 @@ void process_maps_in_directory(const char *directory)
     }
     else
     {
-        printf("mparse: %s\n", directory);
-        perror("Não foi possível abrir o diretório");
+        printf(RED "\nErro ao abrir diretório %s\n" RST, directory);
+        perror(RED "Não foi possível abrir o diretório"RST);
     }
 }
 
 int main()
 {
-    while(show_train)
+    while (show_train)
         run_train();
+
     process_maps_in_directory(MAPS_DIRECTORY1);
     process_maps_in_directory(MAPS_DIRECTORY2);
+
+    // Exibe os resultados finais
+    printf("\n\033[1;34m************** RESULTADO FINAL: **************\033[0m\n");
+    printf("\033[1;32m[    PASS   ]: %d\033[0m\n", pass_count);
+    printf("\033[1;31m[ NOT  PASS ]: %d\033[0m\n", not_pass_count);
 
     return EXIT_SUCCESS;
 }

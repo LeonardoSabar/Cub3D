@@ -16,6 +16,8 @@
 # define DEBUG 0
 # define DEBUGHARD 0
 
+#define DELAY_ITERATIONS 50000000
+
 # define SUCCESS 0
 # define ERROR 1
 

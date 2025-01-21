@@ -6,13 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:47:13 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/21 14:59:47 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:00:52 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-#define DELAY_ITERATIONS 50000000
 
 static void busy_wait_delay(void)
 {

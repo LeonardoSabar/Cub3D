@@ -17,6 +17,7 @@
 # define DEBUGHARD 0
 
 #define DELAY_ITERATIONS 50000000
+#define INTRO_HEIGHT 8
 
 # define SUCCESS 0
 # define ERROR 1

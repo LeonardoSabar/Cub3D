@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:47:13 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/21 15:00:52 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:09:49 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,5 @@ static void run_columns_intro(void)
 void    intro(void)
 {
     run_columns_intro();
-    printf(B "\n_____________________ Welcome to the Cub3D project!\n\n" RST);
+    printf(B "\n____________________ Welcome to the Cub3D project!\n\n" RST);
 }

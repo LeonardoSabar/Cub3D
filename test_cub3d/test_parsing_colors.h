@@ -1,5 +1,5 @@
-#ifndef COLORS_H
-# define UTILS_H
+#ifndef TEST_PARSING_COLORS_H
+# define TEST_PARSING_COLORS_H
 
 // Cores
 # define RST    "\033[0m"      /* Reset to default color */

@@ -5,12 +5,12 @@
 #include <stdbool.h>
 #include <errno.h>
 #include <sys/stat.h> 
-#include "./include/colors.h"
+#include "./test_parsing_colors.h"
 #include <unistd.h>
 
-#define MAPS_DIRECTORY1 "maps/Good/" 
-#define MAPS_DIRECTORY2 "maps/Bad/" 
-#define CUB_EXECUTABLE "./cub3d" 
+#define MAPS_DIRECTORY1 "./maps/Good/" 
+#define MAPS_DIRECTORY2 "./maps/Bad/" 
+#define CUB_EXECUTABLE ".././cub3d" 
 
 
 #define TERMINAL_WIDTH 100 // Largura do terminal

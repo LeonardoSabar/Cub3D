@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:24:11 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/20 03:10:47 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/01/21 13:26:38 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,19 @@ static bool	is_all_non_numeric(char *str)
 		i++;
 	}
 	return (found_no_digit);
+}
+static int valid_number( char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if ((ft_isdigit(str[i]) == 0) && (str[i] != ' ') && (str[i] != '\t') && (str[i] != '\n') && (str[i] != '\r') && (str[i] != '-'))
+			return (0);
+		i++;
+	}
+	return (1);
 }
 
 static int	*convert_to_rgb_array(char **rgb_to_convert, int *rgb)
@@ -56,7 +69,14 @@ static int	*parse_rgb_color(char *line)
 	rgb_to_convert = ft_split(line, ',');
 	count = 0;
 	while (rgb_to_convert[count])
+	{
+		if (!valid_number(rgb_to_convert[count]))
+		{
+			free_tab((void **)rgb_to_convert);
+			return (0);
+		}
 		count++;
+	}
 	if (count != 3)
 	{
 		free_tab((void **)rgb_to_convert);

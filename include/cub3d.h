@@ -14,7 +14,7 @@
 # include <errno.h>
 
 # define DEBUG 0
-# define DEBUGHARD 1
+# define DEBUGHARD 0
 
 # define SUCCESS 0
 # define ERROR 1
@@ -184,5 +184,6 @@ int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
 int		special_ft_strncmp(const char *str1, const char *str2, size_t n);
 
 void print_game_info(t_game game);
+void intro(void);
 
 #endif

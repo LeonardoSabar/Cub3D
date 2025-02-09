@@ -140,11 +140,21 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+typedef struct s_mini_map
+{
+	int		x;
+	int		y;
+	int		color;
+	int		width;
+	int		height;
+}	t_mini_map;
+
 typedef struct s_game
 {
 	int			is_horizon;
 	char		**parse_map; // Confirmar se esta sendo utilizada
 	char		**map;
+	t_mini_map	mini_map; // Estrutura indenpendente para o minimapa // inicilaizare no init_data
 	t_player	player;
 	t_texinfo	texinfo;
     t_mapinfo	mapinfo;

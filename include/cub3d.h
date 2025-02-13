@@ -39,11 +39,27 @@
 //                                  Structs                                   //
 //****************************************************************************//
 
+enum e_color {
+	COLOR_A = 0xFF000000,
+	COLOR_R = 0x00FF0000,
+	COLOR_G = 0x0000FF00,
+	COLOR_B = 0x000000FF
+};
+
+typedef struct s_render_img
+{
+	int	x;
+	int	y;
+	int	z;
+	int32_t	index;
+}	t_r_img;
+
 typedef struct	s_ray
 {
- double	ray_ngl;
- double	distance;
- int	flag;
+	t_r_img	*info;
+	double	ray_ngl;
+	double	distance;
+	int		flag;
 }				t_ray;
 
 typedef struct s_tile
@@ -59,12 +75,6 @@ typedef struct s_image
 	mlx_image_t		*img;
 }	t_img;
 
-typedef struct s_render_img
-{
-	int	x;
-	int	y;
-	int	z;
-}	t_r_img;
 
 typedef struct s_object
 {
@@ -94,6 +104,14 @@ typedef struct s_cam
 	float	fov_plr;
 }	t_cam;
 
+typedef struct	s_texture
+{
+	mlx_texture_t	*north;
+	mlx_texture_t	*south;
+	mlx_texture_t	*west;
+	mlx_texture_t	*east;
+}	t_texture;
+
 typedef struct s_texinfo
 {
 	char			*hexadecimal_floor;
@@ -112,6 +130,7 @@ typedef struct s_texinfo
 	double			pos;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
+	t_texture		tex;
 }	t_texinfo;
 
 typedef struct s_mapinfo
@@ -168,6 +187,7 @@ typedef struct s_game
 	t_cam		*cam;
 	t_ray		ray;
 	t_obj		obj;
+
 }	t_game;
 
 
@@ -195,6 +215,33 @@ int     parse_textures(t_texinfo *textures);
 int     parsing(t_game *data, char **argv);
 int     set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
 int		special_ft_strncmp(const char *str1, const char *str2, size_t n);
+t_texture	*create_texture(t_game *gm);
+void	put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
+void    hook(t_game *gm, double move_x, double move_y);
+//void    game_loop(void *game);
+void    game_loop2(void *game);
+void    move_player(t_game *gm, double move_x, double move_y);
+void    rotate_player(t_game *gm, int direction);
+void	ft_reles(mlx_key_data_t keydata, t_game *gm);
+void	mlx_key(mlx_key_data_t keydata, void *ml);
+int     unit_circle(float angle, char c);
+int		inter_check(float angle, float *inter, float *step, t_game *gm);
+int		wall_hit(float x, float y, t_game *gm);
+float	get_h_inter(t_game *gm, float angl);
+float	get_v_inter(t_game *gm, float angl);
+void	cast_rays(t_game *gm);
+void    init_background(t_game *gm);
+float	nor_angle(float angle);
+float	pytheorem(float a, float b);
+int		h_unit_circle(float angle);
+int		v_unit_circle(float angle);
+uint32_t	reverse_bytes(unsigned int c);
+void    init_mini_map(t_game *gm);
+mlx_texture_t    *get_texture(t_game *gm);
+void	draw_wall2(t_game *gm, int t_pix, int b_pix, double wall_h);
+void	render_wall(t_game *gm, int ray);
+
+
 
 void print_game_info(t_game game);
 void intro(void);

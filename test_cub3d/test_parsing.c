@@ -6,6 +6,7 @@
 #include <errno.h>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <time.h> // Para controle de tempo
 #include "test_parsing_colors.h"
 
 #define MAPS_DIRECTORY1 "./maps/Good/"
@@ -14,7 +15,6 @@
 
 #define TERMINAL_WIDTH 100 // Largura do terminal
 #define DELAY 30000        // Tempo de delay do trem (30ms)
-#define TEST_DELAY 300000  // Delay entre testes (0.3s)
 
 // Contadores globais de resultados
 int pass_count = 0; 
@@ -47,12 +47,10 @@ void run_train(void)
         while (row < train_height)
         {
             int spaces = TERMINAL_WIDTH - frame;
-            int space_count = 0;
 
-            while (space_count < spaces)
+            for (int space_count = 0; space_count < spaces; space_count++)
             {
                 printf(" ");
-                space_count++;
             }
             if (spaces + train_length > 0)
                 printf(C "%s\n" RST, train[row]);
@@ -63,7 +61,7 @@ void run_train(void)
         }
         printf(Y"\n_________________________________________ Aguarde, estamos rodando os testes...\n" RST);
         frame++;
-        usleep(DELAY);
+        usleep(DELAY); // Atraso do trem - mantenha se necessário
     }
     printf("\033[H\033[J");
     show_train = 0;
@@ -108,7 +106,7 @@ void test_map_parsing(const char *map_path, const char *directory)
             not_pass_count++;
         }
     }
-    usleep(TEST_DELAY);
+    // Remover ou reduzir o delay entre testes
 }
 
 void process_maps_in_directory(const char *directory)
@@ -141,22 +139,29 @@ void process_maps_in_directory(const char *directory)
     else
     {
         printf(RED "\nErro ao abrir diretório %s\n" RST, directory);
-        perror(RED "Não foi possível abrir o diretório"RST);
+        perror(RED "Não foi possível abrir o diretório" RST);
     }
 }
 
 int main()
 {
+    clock_t start_time = clock(); // Início do tempo
     while (show_train)
         run_train();
 
+    // Processar Diretórios
     process_maps_in_directory(MAPS_DIRECTORY1);
     process_maps_in_directory(MAPS_DIRECTORY2);
+
+    // Imprime o total de tempo de execução
+    clock_t end_time = clock();
+    double cpu_time_used = ((double) (end_time - start_time)) / CLOCKS_PER_SEC;
 
     // Exibe os resultados finais
     printf("\n\033[1;34m************** RESULTADO FINAL: **************\033[0m\n");
     printf("\033[1;32m[    PASS   ]: %d\033[0m\n", pass_count);
     printf("\033[1;31m[ NOT  PASS ]: %d\033[0m\n", not_pass_count);
+    printf("\033[1;36m[Duração total: %.2f segundos]\033[0m\n", cpu_time_used);
 
     return EXIT_SUCCESS;
 }

@@ -51,7 +51,7 @@ int	check_map_sides(t_mapinfo *map, char **map_tab)
 	while (i < (map->height - 1))
 	{
 		j = ft_strlen(map_tab[i]) - 1;
-		if (map_tab[i][j] == '\r') // resolve problema de '\r' no final da linha // Manter?
+		if (map_tab[i][j] == '\r')
 			j--;
 		if (map_tab[i][j] != '1')
 			return (FAILURE);

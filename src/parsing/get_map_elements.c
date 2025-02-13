@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/21 12:26:17 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:40:14 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ static int assign_direction_textures(t_texinfo *textures, char *line, int j)
 	line_length = ft_strlen(line); 
     if ((size_t)(j + 2) >= line_length || !ft_isprint(line[j + 2]))
         return (2);
-    while (line[j] == ' ' || line[j] == '\t') // retirar
-        j++; // retirar
+    while (line[j] == ' ' || line[j] == '\t')
+        j++;
     if (line[j] == 'N' && line[j + 1] == 'O' && !(textures->north))
         textures->north = parse_texture_path(line, j + 2);
     else if (line[j] == 'S' && line[j + 1] == 'O' && !(textures->south))

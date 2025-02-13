@@ -6,18 +6,14 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:26:01 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/12 22:08:46 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int check_map_elements(t_game *data, char **map_tab)
+static int check_map_elements(t_game *data, char **map_tab, int i, int j)
 {
-    int i;
-    int j;
-
-	i = 0;
     data->player.dir = '0';
     while (map_tab[i] != NULL)
     {
@@ -121,7 +117,7 @@ int	parse_map(t_game *data, char **map_tab)
 		return (err_msg(Y "Map is not surrounded by walls" RST, FAILURE));
 	if (data->mapinfo.height < 3)
 		return (err_msg(Y "Map is too small" RST, FAILURE));
-	if (check_map_elements(data, map_tab) == FAILURE)
+	if (check_map_elements(data, map_tab, 0, 0) == FAILURE)
 		return (FAILURE);
 	if (check_player_position(data, map_tab) == FAILURE)
 		return (FAILURE);

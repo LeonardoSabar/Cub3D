@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 12:41:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/19 21:40:33 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/12 21:59:43 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,44 +40,38 @@ static void link_nodes(t_map *current, t_map *previous, t_map *up)
     }
 }
 
-static t_map *fill_map_list(char **map_tab, int height, int width)
+static void cleanup_map(t_map **head) 
+{
+    while (*head) {
+        t_map *temp = *head;
+        *head = (*head)->nxt;
+        free(temp);
+    }
+}
+
+static t_map *fill_map_list(char **map_tab, int height, int width) 
 {
     t_map *head = NULL; 
     t_map *current = NULL; 
     t_map *previous = NULL; 
     t_map *up = NULL;
 
-    int i = 0;
-    while (i < height) {
-        int j = 0;
-        up = NULL;
-        while (j < width) {
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
             char content = map_tab[i][j];
-            if (content == ' ' || content == '\t') { 
-                j++;
-                continue;
-            }
+            if (content == ' ' || content == '\t') continue;
             current = create_new_map_node(i, j, content);
             if (!current) {
-                while (head) {
-                    t_map *temp = head;
-                    head = head->nxt;
-                    free(temp);
-                }
+                cleanup_map(&head); 
                 return NULL;
             }
-            if (!head)
-                head = current;
-            else
-                link_nodes(current, previous, up);
+            if (!head) head = current;
+            else link_nodes(current, previous, up);
             previous = current;
-            if (i > 0) 
-                up = previous;
-            j++;
+            if (i > 0) up = previous;
         }
-        i++;
     }
-    return (head);
+    return head;
 }
 
 int get_map_list_node(t_game *data, char **map_tab) {

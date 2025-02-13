@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/12 22:08:46 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/13 02:03:03 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,9 +118,9 @@ int	parse_map(t_game *data, char **map_tab)
 	if (data->mapinfo.height < 3)
 		return (err_msg(Y "Map is too small" RST, FAILURE));
 	if (check_map_elements(data, map_tab, 0, 0) == FAILURE)
-		return (FAILURE);
+		return (err_msg(Y "Map contains invalid elements" RST, FAILURE));
 	if (check_player_position(data, map_tab) == FAILURE)
-		return (FAILURE);
+		return (err_msg(Y "Player position is not valid" RST, FAILURE));
 	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
 		return (err_msg(Y "Map is not at the end of the file" RST, FAILURE));
 	return (SUCCESS);

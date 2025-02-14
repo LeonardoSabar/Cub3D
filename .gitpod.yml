@@ -1,0 +1,22 @@
+image:
+  file: .gitpod.Dockerfile
+tasks:
+  - init: |
+      sudo apt-get update
+      sudo apt-get install -y xfce4 xfce4-goodies xorg dbus-x11 x11vnc xvfb
+      sudo apt-get install -y tigervnc-standalone-server
+      sudo apt-get install -y libxext6 libxrender1 libxtst6 libxi6 libxinerama1
+      sudo apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev
+      sudo apt-get install -y libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxcursor-dev
+      sudo apt-get install -y cmake
+      mkdir -p ~/.vnc
+      echo "password" | vncpasswd -f > ~/.vnc/passwd
+      chmod 600 ~/.vnc/passwd
+      export DISPLAY=:1
+      Xvfb :1 -screen 0 1024x768x16 &
+      x11vnc -display :1 -usepw -forever &
+      xfce4-session &
+    command: |
+      export DISPLAY=:1
+      make
+      ./cub3d

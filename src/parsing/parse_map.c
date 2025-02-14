@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/14 02:05:39 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/14 02:07:02 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int check_map_elements(t_game *data, char **map_tab, int i, int j)
             if (map_tab[i][j] == '\0')
                 break;
             if (!(ft_strchr("10NSEW", map_tab[i][j])))
-                return (err_msg(Y "Invalid map element" RST, FAILURE));
+                return (FAILURE);
             if (ft_strchr("NSEW", map_tab[i][j])) 
             {
                 if (data->player.dir != '0') 

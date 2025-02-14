@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/13 02:03:03 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/14 02:03:58 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ static int	check_player_position(t_game *data, char **map_tab)
 		{
 			if (ft_strchr("NSEW", map_tab[i][j]))
 			{
-				data->player.pos_x = (double)j + 0.5;
-				data->player.pos_y = (double)i + 0.5;
+				data->player.pos_x = (double)j;
+				data->player.pos_y = (double)i;
 				map_tab[i][j] = '0';
 			}
 			j++;

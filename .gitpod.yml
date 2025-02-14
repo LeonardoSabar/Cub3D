@@ -8,7 +8,6 @@ tasks:
       sudo apt-get install -y libxext6 libxrender1 libxtst6 libxi6 libxinerama1
       sudo apt-get install -y libglu1-mesa-dev freeglut3-dev mesa-common-dev
       sudo apt-get install -y libx11-dev libxext-dev libxrandr-dev libxinerama-dev libxcursor-dev
-      sudo apt-get install -y cmake
       mkdir -p ~/.vnc
       echo "password" | vncpasswd -f > ~/.vnc/passwd
       chmod 600 ~/.vnc/passwd
@@ -20,3 +19,7 @@ tasks:
       export DISPLAY=:1
       make
       ./cub3d
+ports:
+  - port: 5900
+    onOpen: ignore
+

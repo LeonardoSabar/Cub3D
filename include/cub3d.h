@@ -40,17 +40,16 @@
 //****************************************************************************//
 
 enum e_color {
-	COLOR_A = 0xFF000000,
-	COLOR_R = 0x00FF0000,
-	COLOR_G = 0x0000FF00,
-	COLOR_B = 0x000000FF
+	A = 0xFF000000,
+	R = 0x00FF0000,
+	G = 0x0000FF00,
+	B = 0x000000FF
 };
 
 typedef struct s_render_img
 {
-	int	x;
-	int	y;
-	int	z;
+	double	x;
+	double	y;
 	int32_t	index;
 }	t_r_img;
 
@@ -74,7 +73,6 @@ typedef struct s_image
 	mlx_texture_t	*texture;
 	mlx_image_t		*img;
 }	t_img;
-
 
 typedef struct s_object
 {
@@ -114,8 +112,6 @@ typedef struct	s_texture
 
 typedef struct s_texinfo
 {
-	char			*hexadecimal_floor;
-	char			*hexadecimal_ceiling;
 	char			*north;
 	char			*south;
 	char			*west;
@@ -130,7 +126,7 @@ typedef struct s_texinfo
 	double			pos;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
-	t_texture		tex;
+	t_texture		*tex;
 }	t_texinfo;
 
 typedef struct s_mapinfo
@@ -159,27 +155,17 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
-typedef struct s_mini_map
-{
-	int		x;
-	int		y;
-	int		color;
-	int		width;
-	int		height;
-}	t_mini_map;
-
 typedef struct s_game
 {
 	int			is_horizon;
-	char		**parse_map; // Confirmar se esta sendo utilizada
+	char		**parse_map;
 	char		**map;
-	t_mini_map	mini_map; // Estrutura indenpendente para o minimapa // inicilaizare no init_data
 	t_player	player;
-	t_texinfo	texinfo;
+	t_texinfo	*texinfo;
     t_mapinfo	mapinfo;
 	mlx_image_t	*img;
 	mlx_image_t	*game;
-	mlx_image_t	*p_img;
+	mlx_image_t	*wall_img;
 	mlx_image_t	*bg_img;
 	t_tile		tile;
 	mlx_t		*mlx_on;
@@ -187,7 +173,6 @@ typedef struct s_game
 	t_cam		*cam;
 	t_ray		ray;
 	t_obj		obj;
-
 }	t_game;
 
 

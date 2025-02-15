@@ -124,6 +124,16 @@ typedef struct s_player
 	double	plane_y;
 }	t_player;
 
+typedef struct s_key_data
+{
+	bool	s;
+	bool	w;
+	bool	a;
+	bool	d;
+	bool	left;
+	bool	right;
+}	t_key_data;
+
 typedef struct s_game
 {
 	int			is_horizon;
@@ -142,6 +152,7 @@ typedef struct s_game
 	t_cam		*cam;
 	t_ray		ray;
 	t_obj		obj;
+	t_key_data	key_data;
 }	t_game;
 
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/14 11:10:49 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:37:29 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void init_cam(t_cam *cam)
     cam->l_r = 0;
     cam->angle = 0.0;
     cam->fov_plr = 0.0;
-    
+
 }
 
 void init_texinfo(t_texinfo **texinfo)
@@ -109,13 +109,23 @@ void init_player(t_player *player)
     player->pos_x = 0.0;
     player->pos_y = 0.0;
     player->dir_x = 1.0;
-    player->dir_y = 0.0; 
+    player->dir_y = 0.0;
     player->plane_x = 0.0;
     player->plane_y = 0.0;
     player->has_moved = 0;
     player->move_x = 0;
     player->move_y = 0;
     player->rotate = 0;
+}
+
+void init_hook(t_hook *hook)
+{
+    hook->w = false;
+    hook->s = false;
+    hook->a = false;
+    hook->d = false;
+    hook->left = false;
+    hook->right = false;
 }
 
 // Função para inicializar t_game
@@ -127,12 +137,13 @@ void init_data(t_game *data)
     init_player(&data->player);
     init_texinfo(&data->texinfo);
     init_mapinfo(&data->mapinfo);
-    data->img = NULL;  
-    data->game = NULL;  
-    data->wall_img = NULL; 
-    data->bg_img = NULL; 
+    data->hook = malloc(sizeof(t_hook));
+    data->img = NULL;
+    data->game = NULL;
+    data->wall_img = NULL;
+    data->bg_img = NULL;
     init_tile(&data->tile);
-    data->mlx_on = NULL; 
+    data->mlx_on = NULL;
     data->map_position = NULL;
     data->cam = malloc(sizeof(t_cam));
     if (!data->cam) {

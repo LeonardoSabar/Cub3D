@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/14 11:18:05 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/15 20:09:54 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void	calc_lines_and_columns(t_map *map_position, t_tile *tile)
 	int		line;
 	int		column;
 	t_map	*map;
-	
+
 	line = 0;
 	column = 0;
 	map = map_position;
@@ -75,10 +75,8 @@ int	parsing(t_game *data, char **argv)
 		printf(RED "\n++++++    Textures  parsed    ++++++\n" RST); // Retirar
 	// if (DEBUG == 1)
 	// 	printf(G "\n++ Parsing completed successfully ++\n\n" RST); // Retirar
-	if (DEBUGHARD == 1)
-		print_game_info(*data); // Retirar
 	calc_lines_and_columns(data->map_position, &data->tile);
-	start_cam_infor(data);
+	//start_cam_infor(data);
 	printf("%d --- %d --- %d\n", data->tile.height, data->tile.width, data->tile.base);
 	return (SUCCESS);
 }

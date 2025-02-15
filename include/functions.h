@@ -27,7 +27,17 @@ int				parse_textures(t_texinfo *textures);
 int				parsing(t_game *data, char **argv);
 int				set_floor_and_ceiling_colors(t_texinfo *textures, char *line, int j);
 int				special_ft_strncmp(const char *str1, const char *str2, size_t n);
-int				unit_circle(float angle, char c);
+
+
+void	init_screen(t_game *data);
+void	hook_key(mlx_key_data_t keydata, void *param);
+
+void			print_game_info(t_game game);
+
+#endif
+
+
+/*int				unit_circle(float angle, char c);
 int				inter_check(float angle, float *inter, float *step, t_game *gm);
 int				wall_hit(float x, float y, t_game *gm);
 float			get_h_inter(t_game *gm, float angl);
@@ -55,7 +65,4 @@ void			put_pixel(mlx_image_t *img, uint32_t x, uint32_t y, uint32_t color);
 void			draw_wall2(t_game *gm, int t_pix, int b_pix, double wall_h);
 uint32_t		reverse_bytes(unsigned int c);
 void			start_cam_infor(t_game *game);
-
-void			print_game_info(t_game game);
-
-#endif
+*/

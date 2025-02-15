@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:57:45 by tsantana          #+#    #+#             */
-/*   Updated: 2025/02/08 16:49:13 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/13 15:21:30 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 void    rotate_player(t_game *gm, int i)
 {
@@ -58,14 +58,14 @@ void    hook(t_game *gm, double move_x, double move_y)
 {
 	if (gm->cam->rotation == 1)
 		rotate_player(gm, 1);
-	if (gm->cam->rotation == -1)
+	else if (gm->cam->rotation == -1)
 		rotate_player(gm, -1);
-	if (gm->cam->l_r == 1)
+	else if (gm->cam->l_r == 1)
 	{
 		move_x = -sin(gm->cam->angle);
 		move_y = cos(gm->cam->angle);
 	}
-	if (gm->cam->l_r == -1)
+	else if (gm->cam->l_r == -1)
 	{
 		move_x = sin(gm->cam->angle);
 		move_y = -cos(gm->cam->angle);

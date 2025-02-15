@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 float	nor_angle(float angle)
 {
@@ -37,7 +37,7 @@ int	v_unit_circle(float angle)
 
 uint32_t	reverse_bytes(unsigned int c)
 {
-	return ((c & COLOR_R) >> 8 | (c & COLOR_G) << 8 | (c & COLOR_B) << 24 | (c & COLOR_A) >> 24);
+	return ((c & R) >> 8 | (c & G) << 8 | (c & B) << 24 | (c & A) >> 24);
 }
 
 // mlx_texture_t	*get_texture(t_game *gm)

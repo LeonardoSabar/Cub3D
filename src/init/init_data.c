@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_data.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/20 21:21:14 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:10:49 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,20 @@
 #include <string.h>
 #include "cub3d.h" // Substitua pelo caminho correto do seu cabeçalho
 
+void init_render_img(t_r_img *render_img)
+{
+    render_img->x = 0;
+    render_img->y = 0;
+    render_img->index = 0;
+}
+
 void init_ray(t_ray *ray)
 {
     ray->ray_ngl = 0.0;
     ray->distance = 0.0;
     ray->flag = 0;
+    ray->info = malloc(sizeof(t_r_img));
+    init_render_img(ray->info);
 }
 
 void init_tile(t_tile *tile)
@@ -34,13 +43,6 @@ void init_img(t_img *img)
 {
     img->texture = NULL;
     img->img = NULL;
-}
-
-void init_render_img(t_r_img *render_img)
-{
-    render_img->x = 0;
-    render_img->y = 0;
-    render_img->z = 0;
 }
 
 void init_obj(t_obj *obj)
@@ -68,25 +70,26 @@ void init_cam(t_cam *cam)
     cam->rotation = 0;
     cam->l_r = 0;
     cam->angle = 0.0;
-    cam->fov_plr = 0.0f;
+    cam->fov_plr = 0.0;
+    
 }
 
-void init_texinfo(t_texinfo *texinfo)
+void init_texinfo(t_texinfo **texinfo)
 {
-    texinfo->hexadecimal_ceiling = NULL;
-    texinfo->hexadecimal_floor = NULL;
-    texinfo->north = NULL;
-    texinfo->south = NULL;
-    texinfo->west = NULL;
-    texinfo->east = NULL;
-    texinfo->floor = NULL;
-    texinfo->ceiling = NULL;
-    texinfo->size = 0;
-    texinfo->index = 0;
-    texinfo->step = 0.0;
-    texinfo->pos = 0.0;
-    texinfo->x = 0;
-    texinfo->y = 0;
+    (*texinfo) = malloc(sizeof (t_texinfo));
+    (*texinfo)->north = NULL;
+    (*texinfo)->south = NULL;
+    (*texinfo)->west = NULL;
+    (*texinfo)->east = NULL;
+    (*texinfo)->floor = NULL;
+    (*texinfo)->ceiling = NULL;
+    (*texinfo)->size = 0;
+    (*texinfo)->index = 0;
+    (*texinfo)->step = 0.0;
+    (*texinfo)->pos = 0.0;
+    (*texinfo)->x = 0;
+    (*texinfo)->y = 0;
+    (*texinfo)->tex = (t_texture *){0};
 }
 
 void init_mapinfo(t_mapinfo *mapinfo)
@@ -126,7 +129,7 @@ void init_data(t_game *data)
     init_mapinfo(&data->mapinfo);
     data->img = NULL;  
     data->game = NULL;  
-    data->p_img = NULL; 
+    data->wall_img = NULL; 
     data->bg_img = NULL; 
     init_tile(&data->tile);
     data->mlx_on = NULL; 

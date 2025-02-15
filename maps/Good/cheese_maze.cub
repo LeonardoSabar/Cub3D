@@ -1,7 +1,7 @@
-NO textures/simonkraft/wet_sponge.xpm
-SO textures/simonkraft/wet_sponge.xpm
-WE textures/simonkraft/wet_sponge.xpm
-EA textures/simonkraft/wet_sponge.xpm
+NO textures/original/north.png
+SO textures/original/south.png
+WE textures/original/west.png
+EA textures/original/east.png
 
 F 164,169,20
 C 153,204,255

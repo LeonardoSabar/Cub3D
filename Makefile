@@ -6,13 +6,13 @@
 #    By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/29 00:11:18 by leobarbo          #+#    #+#              #
-#    Updated: 2025/01/14 23:34:21 by leobarbo         ###   ########.fr        #
+#    Updated: 2025/02/15 14:57:27 by leobarbo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME        := cub3d
 CC          := gcc
-CFLAGS      := -Wextra -Wall -Werror -Wunreachable-code -Ofast -g3 -fPIC
+CFLAGS      := -Wextra -Wall -Werror -g3
 LIBFT       := ./lib/libft
 LIBMLX42_PATH := ./lib/MLX42
 LIBMLX_REPO := https://github.com/codam-coding-college/MLX42.git

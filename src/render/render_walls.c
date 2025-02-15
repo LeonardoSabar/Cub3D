@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   render_walls.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:15:05 by tsantana          #+#    #+#             */
-/*   Updated: 2025/02/10 17:43:38 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:03:41 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 // static void my_mlx_pixel_put(t_game *gm, int x, int y, int color)
 // {
@@ -164,12 +164,12 @@ mlx_texture_t    *get_texture(t_game *gm)
 	if (gm->ray.info->y)
 	{
 		if (v_unit_circle(gm->ray.ray_ngl))
-			return (gm->texinfo.tex.west);
-		return (gm->texinfo.tex.east);
+			return (gm->texinfo->tex->west);
+		return (gm->texinfo->tex->east);
 	}
 	if (h_unit_circle(gm->ray.ray_ngl))
-		return (gm->texinfo.tex.south);
-	return (gm->texinfo.tex.north);
+		return (gm->texinfo->tex->south);
+	return (gm->texinfo->tex->north);
 }
 
 static double	get_x_o(mlx_texture_t *texture, t_game *gm)
@@ -182,7 +182,7 @@ static double	get_x_o(mlx_texture_t *texture, t_game *gm)
 		x = fmodf((gm->ray.info->x * (width / gm->tile.base)), width);
 	else
 		x = fmodf((gm->ray.info->y * (width / gm->tile.base)), width);
-	if (texture == gm->texinfo.tex.south || texture == gm->texinfo.tex.west)
+	if (texture == gm->texinfo->tex->south || texture == gm->texinfo->tex->west)
 		return (width - x);
 	return (x);
 }
@@ -197,17 +197,20 @@ void	draw_wall2(t_game *gm, int t_pix, int b_pix, double wall_h)
 
 	texture = get_texture(gm);
 	arr = (uint32_t *)texture->pixels;
-	factor = (double)texture->height / wall_h;
+	factor = (double) (texture->height / wall_h);
 	x = get_x_o(texture, gm);
-	y = (t_pix - ((double) gm->img->height / 2) + (wall_h / 2)) * factor;
+	y = (t_pix - ((double) HEIGHT / 2) + (wall_h / 2)) * factor;
 	if (y < 0)
 		y = 0;
+	gm->wall_img = mlx_new_image(gm->mlx_on, WIDTH, HEIGHT);
 	while (t_pix < b_pix)
 	{
-		put_pixel(gm->img, gm->ray.info->index, t_pix++,
+		put_pixel(gm->wall_img, gm->ray.info->index, t_pix++,
 			reverse_bytes(arr[(int) y * texture->width + (int) x]));
 		y += factor;
 	}
+	mlx_image_to_window(gm->mlx_on, gm->wall_img, 0, 0);
+	gm->bg_img->instances[1].z = true;
 }
 
 void	render_wall(t_game *gm, int ray)
@@ -217,14 +220,17 @@ void	render_wall(t_game *gm, int ray)
 	float	t_pix;
 
 	gm->ray.distance *= cos(nor_angle(gm->ray.ray_ngl - gm->cam->angle));
-	wall_h = (gm->tile.base / gm->ray.distance) * (((float) gm->img->width / 2)
+	wall_h = (gm->tile.base / gm->ray.distance) * (((float) WIDTH / 2)
 			/ tan(gm->cam->fov_plr / 2));
-	b_pix = ((double) gm->img->height / 2) + (wall_h / 2);
-	t_pix = ((double) gm->img->height / 2) - (wall_h / 2);
-	if (b_pix > gm->img->height)
-		b_pix = gm->img->height;
+	b_pix = ((double) HEIGHT / 2) + (wall_h / 2);
+	t_pix = ((double) HEIGHT / 2) - (wall_h / 2);
+	//printf("-> %f | %f ||| -> wall_h: %f | distance: %f\n", b_pix, t_pix, wall_h, gm->ray.distance);
+	if (b_pix > HEIGHT)
+		b_pix = HEIGHT;
 	if (t_pix < 0)
 		t_pix = 0;
 	gm->ray.info->index = ray;
+	if (gm->wall_img)
+		mlx_delete_image(gm->mlx_on, gm->wall_img);
 	draw_wall2(gm, t_pix, b_pix, wall_h);
 }

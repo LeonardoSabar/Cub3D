@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   gameloop2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 13:58:16 by tsantana          #+#    #+#             */
-/*   Updated: 2025/02/10 18:12:27 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:08:20 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 void    game_loop2(void *game)
 {
@@ -21,7 +21,7 @@ void    game_loop2(void *game)
 		mlx_delete_image(gm->mlx_on, gm->game);
 	gm->game = mlx_new_image(gm->mlx_on, WIDTH, HEIGHT);
 //	hook(gm, 0, 0);
-//	cast_rays(gm);
+	cast_rays(gm);
 //	raycast(gm);
 	mlx_image_to_window(gm->mlx_on, gm->game, 0, 0);
 }

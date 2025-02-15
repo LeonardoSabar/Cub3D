@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   parse_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 00:39:49 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/14 02:07:02 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/13 13:06:36 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
 
-static int check_map_elements(t_game *data, char **map_tab, int i, int j)
+static int check_map_elements(t_game *data, char **map_tab)
 {
+    int i;
+    int j;
+
+	i = 0;
     data->player.dir = '0';
     while (map_tab[i] != NULL)
     {
@@ -27,7 +31,7 @@ static int check_map_elements(t_game *data, char **map_tab, int i, int j)
             if (map_tab[i][j] == '\0')
                 break;
             if (!(ft_strchr("10NSEW", map_tab[i][j])))
-                return (FAILURE);
+                return (err_msg(Y "Invalid map element" RST, FAILURE));
             if (ft_strchr("NSEW", map_tab[i][j])) 
             {
                 if (data->player.dir != '0') 
@@ -65,7 +69,7 @@ static int	check_player_position(t_game *data, char **map_tab)
 	int	j;
 
 	if (data->player.dir == '0')
-		return (FAILURE);
+		return (err_msg(Y "Player position is not defined" RST, FAILURE));
 	i = 0;
 	while (map_tab[i])
 	{
@@ -74,7 +78,7 @@ static int	check_player_position(t_game *data, char **map_tab)
 		{
 			if (ft_strchr("NSEW", map_tab[i][j]))
 			{
-				data->player.pos_x = (double)j;
+				data->player.pos_x = (double)j;//retirado .5
 				data->player.pos_y = (double)i;
 				map_tab[i][j] = '0';
 			}
@@ -117,10 +121,10 @@ int	parse_map(t_game *data, char **map_tab)
 		return (err_msg(Y "Map is not surrounded by walls" RST, FAILURE));
 	if (data->mapinfo.height < 3)
 		return (err_msg(Y "Map is too small" RST, FAILURE));
-	if (check_map_elements(data, map_tab, 0, 0) == FAILURE)
-		return (err_msg(Y "Map contains invalid elements" RST, FAILURE));
+	if (check_map_elements(data, map_tab) == FAILURE)
+		return (FAILURE);
 	if (check_player_position(data, map_tab) == FAILURE)
-		return (err_msg(Y "Player position is not valid" RST, FAILURE));
+		return (FAILURE);
 	if (check_map_is_at_the_end(&data->mapinfo) == FAILURE)
 		return (err_msg(Y "Map is not at the end of the file" RST, FAILURE));
 	return (SUCCESS);

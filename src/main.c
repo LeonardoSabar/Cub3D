@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:53:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/13 01:02:00 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/15 14:37:12 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	if (parsing(&data, argv) == ERROR)
 		clean_exit(&data, 1);
+	printf("plr_x: %f plr_y: %f dir: %c angle: %f\n", data.player.pos_x, data.player.pos_y, data.player.dir, data.cam->angle);
 	data.texinfo->tex = create_texture(&data);
 	data.mlx_on = mlx_init(WIDTH, HEIGHT, "CUB3D", true);
 	init_background(&data);
@@ -30,5 +31,4 @@ int	main(int argc, char **argv)
 	mlx_loop(data.mlx_on);
 	mlx_terminate(data.mlx_on);
 	return (clean_exit(&data, 0), 0);
-	return 0;
 }

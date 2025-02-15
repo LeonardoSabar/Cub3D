@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 16:17:12 by tsantana          #+#    #+#             */
-/*   Updated: 2025/02/10 17:52:52 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/14 11:12:10 by tsantana         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/cub3d.h"
+#include "../include/cub3d.h"
 
 int	unit_circle(float angle, char c)
 {
@@ -59,14 +59,12 @@ int	wall_hit(float x, float y, t_game *gm)	// check the wall hit
 	if (x < 0 || y < 0)
 		return (0);
 	map = gm->map_position;
-	x_m = floor (x / gm->tile.base); // get the x position in the map
-	y_m = floor (y / gm->tile.base); // get the y position in the map
-	if (y_m >= gm->tile.height || x_m >= gm->tile.width )
+	x_m = floorf (x / gm->tile.base); // get the x position in the map
+	y_m = floorf (y / gm->tile.base); // get the y position in the map
+	if (y_m > gm->tile.height || x_m > gm->tile.width )
 		return (0);
-	printf("%d | %d | %c\n", map->line, y_m, map->down->content);
 	while (map && map->down && map->line != y_m)
 		map = map->down;
-	printf("%d | %d | %c\n", map->line, y_m, map->down->content);
 	while (map && map->nxt && map->column != x_m)
 		map = map->nxt;
 	if (map->content == '1')
@@ -84,11 +82,13 @@ float	get_h_inter(t_game *gm, float angl)
 
 	y_step = gm->tile.base;
 	x_step = gm->tile.base / tan(angl);
-	h_y = floor(gm->cam->plr_y / gm->tile.base) * gm->tile.base;
+	//printf("%f\n", angl);
+	h_y = floorf(gm->cam->plr_y / gm->tile.base) * gm->tile.base;
 	pixel = inter_check(angl, &h_y, &y_step, gm);
 	h_x = gm->cam->plr_x + (h_y - gm->cam->plr_y) / tan(angl);
 	if ((unit_circle(angl, 'y') && x_step > 0) || (!unit_circle(angl, 'y') && x_step < 0))
 		x_step *= -1;
+	//printf(" get_h-> %f | %f | %f | %f | %d\n", h_x, h_y, x_step, y_step, pixel);
 	while (wall_hit(h_x, h_y - pixel, gm)) // check the wall hit whit the pixel value
 	{
 		h_x += x_step;
@@ -128,7 +128,8 @@ void	cast_rays(t_game *gm)
 
 	ray = 0;
 	gm->ray.ray_ngl = gm->cam->angle - ((gm->cam->fov_plr + gm->tile.base) / 2);
-	while (ray < WIDTH)
+	printf("cast_rays -> %f | %f | %f\n", gm->ray.ray_ngl, gm->cam->angle, gm->cam->fov_plr);
+	while (ray <= WIDTH)
 	{
 		gm->ray.flag = 0;
 		h_inter = get_h_inter(gm, nor_angle(gm->ray.ray_ngl));

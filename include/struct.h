@@ -95,7 +95,6 @@ typedef struct s_texinfo
 	double			pos;
 	unsigned long	hex_floor;
 	unsigned long	hex_ceiling;
-	t_texture		*tex;
 }	t_texinfo;
 
 typedef struct s_mapinfo
@@ -134,11 +133,21 @@ typedef struct s_key_data
 	bool	right;
 }	t_key_data;
 
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
+
 typedef struct s_game
 {
 	int			is_horizon;
 	char		**parse_map;
 	char		**map;
+	t_vector	position;
+	t_vector	direction;
+	t_vector	plane;
+	t_texture	*textures;
 	t_player	player;
 	t_texinfo	*texinfo;
     t_mapinfo	mapinfo;

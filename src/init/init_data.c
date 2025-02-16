@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/15 20:37:29 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/16 06:00:53 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include "cub3d.h" // Substitua pelo caminho correto do seu cabeçalho
+#include "cub3d.h" 
 
 void init_render_img(t_r_img *render_img)
 {
@@ -118,14 +118,14 @@ void init_player(t_player *player)
     player->rotate = 0;
 }
 
-void init_hook(t_hook *hook)
+void init_key_data(t_key_data *key_data)
 {
-    hook->w = false;
-    hook->s = false;
-    hook->a = false;
-    hook->d = false;
-    hook->left = false;
-    hook->right = false;
+    key_data->w = 0;
+    key_data->a = 0;
+    key_data->s = 0;
+    key_data->d = 0;
+    key_data->left = 0;
+    key_data->right = 0;
 }
 
 // Função para inicializar t_game
@@ -137,7 +137,7 @@ void init_data(t_game *data)
     init_player(&data->player);
     init_texinfo(&data->texinfo);
     init_mapinfo(&data->mapinfo);
-    data->hook = malloc(sizeof(t_hook));
+    init_key_data(&data->key_data);
     data->img = NULL;
     data->game = NULL;
     data->wall_img = NULL;

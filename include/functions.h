@@ -31,6 +31,7 @@ int				special_ft_strncmp(const char *str1, const char *str2, size_t n);
 
 void	init_screen(t_game *data);
 void	hook_key(mlx_key_data_t keydata, void *param);
+void    init_player(t_game *game);
 
 void			print_game_info(t_game game);
 

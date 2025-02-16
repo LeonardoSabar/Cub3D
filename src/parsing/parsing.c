@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:50:42 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/15 20:09:54 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/16 05:32:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,32 +51,16 @@ int	parsing(t_game *data, char **argv)
 {
     if (parse_file(argv[1], true) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n++++++++    File  parsed    ++++++++\n" RST); // Retirar
 	if (parse_data(argv[1], data) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n++++++++    Data  parsed    ++++++++\n" RST); // Retirar
 	if (get_map_elements(data, data->mapinfo.file) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n++++++++ Map elements parsed +++++++\n" RST); // Retirar
 	if (parse_map(data, data->map) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n+++++++++    Map parsed    +++++++++\n" RST); // Retirar
 	if (get_map_list_node(data, data->map) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n+++++++++   List  filled   +++++++++\n" RST); // Retirar
 	if (parse_textures(data->texinfo) != 0)
 		return (ERROR);
-	if (DEBUG == 1)
-		printf(RED "\n++++++    Textures  parsed    ++++++\n" RST); // Retirar
-	// if (DEBUG == 1)
-	// 	printf(G "\n++ Parsing completed successfully ++\n\n" RST); // Retirar
-	calc_lines_and_columns(data->map_position, &data->tile);
-	//start_cam_infor(data);
-	printf("%d --- %d --- %d\n", data->tile.height, data->tile.width, data->tile.base);
+	calc_lines_and_columns(data->map_position, &data->tile); // Funcao feita pelo Thiago, verificiar se ha necessidade de manter
 	return (SUCCESS);
 }

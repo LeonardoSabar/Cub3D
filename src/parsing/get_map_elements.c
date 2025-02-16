@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_elements.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:52:25 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/12 23:41:08 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/16 05:10:01 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,8 @@ static int assign_direction_textures(t_texinfo *textures, char *line, int j)
     else if (line[j] == 'E' && line[j + 1] == 'A' && !(textures->east))
         textures->east = parse_texture_path(line, j + 2);
     else
-	{
-		//if (textures->north && textures->south && textures->west && textures->east)
-            //return (0);
         return (2);
-	}
-	return (0);
+    return (0);
 }
 
 

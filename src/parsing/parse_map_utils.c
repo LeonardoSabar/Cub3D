@@ -6,13 +6,11 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:07:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/01/17 12:28:42 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/16 05:06:33 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cub3d.h"
-
-
 
 static int check_top_or_bottom(char **map_tab, int i, size_t j)
 {

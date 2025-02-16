@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tsantana <tsantana@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:30:05 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/12 23:38:56 by tsantana         ###   ########.fr       */
+/*   Updated: 2025/02/16 05:06:11 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static bool	parse_cub_extension(char *file)
 	return (!ft_strncmp(file + len - 4, ".cub", 4));
 }
 
-static bool	parse_xpm_extension(char *file)
+static bool	parse_png_extension(char *file)
 {
 	size_t len;
 
@@ -60,7 +60,7 @@ int	parse_file(char *arg, bool cub)
 		if (!parse_cub_extension(arg))
 			return (err_msg(Y "Not a .cub file" RST, 1));
 	}
-	if (!cub && !parse_xpm_extension(arg))
+	if (!cub && !parse_png_extension(arg))
 		return (err_msg(Y "Not a .png file" RST, 1)); // mudar para png.
 	return (0);
 }

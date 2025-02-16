@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 19:01:44 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/16 06:00:53 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/16 06:34:15 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void init_texinfo(t_texinfo **texinfo)
     (*texinfo)->pos = 0.0;
     (*texinfo)->x = 0;
     (*texinfo)->y = 0;
-    (*texinfo)->tex = (t_texture *){0};
 }
 
 void init_mapinfo(t_mapinfo *mapinfo)
@@ -103,7 +102,7 @@ void init_mapinfo(t_mapinfo *mapinfo)
     mapinfo->index_end_of_map = 0;
 }
 
-void init_player(t_player *player)
+void init_data_player(t_player *player)
 {
     player->dir = 'N';
     player->pos_x = 0.0;
@@ -134,7 +133,7 @@ void init_data(t_game *data)
     data->is_horizon = 0;
     data->parse_map = NULL;
     data->map = NULL;
-    init_player(&data->player);
+    init_data_player(&data->player);
     init_texinfo(&data->texinfo);
     init_mapinfo(&data->mapinfo);
     init_key_data(&data->key_data);

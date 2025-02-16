@@ -6,7 +6,7 @@
 /*   By: leobarbo <leobarbo@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 23:53:21 by leobarbo          #+#    #+#             */
-/*   Updated: 2025/02/16 06:22:07 by leobarbo         ###   ########.fr       */
+/*   Updated: 2025/02/16 06:36:54 by leobarbo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ int	main(int argc, char **argv)
 	init_data(&data);
 	if (parsing(&data, argv) == ERROR)
 		clean_exit(&data, 1);
+		
 	init_screen(&data);
 	init_textures(&data);
 	init_player(&data);
-	mlx_loop_hook(data.mlx_on, &hook_key, &data); // Testar no ambiente da 42
+	mlx_key_hook(data.mlx_on, hook_key, &data); // Testar no ambiente da 42
 
 /*
 	mlx_key_hook(data.mlx_on, &mlx_key, &data);
